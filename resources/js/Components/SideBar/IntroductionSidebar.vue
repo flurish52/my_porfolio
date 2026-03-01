@@ -26,10 +26,10 @@
     <div class="md:hidden">
         <!-- Sticky top bar -->
         <header
-            class="fixed bg-white top-0 left-0 right-0 w-full z-50
+            class="fixed   top-0 left-0 right-0 w-full z-50
            flex items-center justify-between
            px-4 py-3
-           bg-surface border-b border-primary/10
+           bg-tertiary border-b border-primary/10
            shadow-[0_2px_12px_theme(colors.primary/6%)]"
         >
             <!-- Mini avatar + name -->
@@ -104,7 +104,7 @@
                 v-if="drawerOpen"
                 id="mobile-drawer"
                 class="fixed inset-y-0 left-0 z-50 w-[78%] max-w-[300px]
-               bg-surface border-r border-primary/10 flex flex-col
+                bg-tertiary text-primary border-r border-primary/10 flex flex-col
                shadow-[8px_0_40px_theme(colors.primary/12%)] overflow-y-auto scrollbar-hide"
                 role="dialog"
                 aria-modal="true"

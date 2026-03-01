@@ -12,7 +12,7 @@ class ContactMe extends Model
 
     protected $fillable = [
         'contact_user_name',
-'contact_user_email',
-'contact_user_message',
+        'contact_user_email',
+        'contact_user_message',
     ];
 }

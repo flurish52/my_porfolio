@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactMe;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-
+use Resend;
 class ContactMeController extends Controller
 {
     /**
@@ -29,30 +28,39 @@ class ContactMeController extends Controller
      */
     public function store(Request $request)
     {
-
         $data = $request->validate([
             'contact_user_name' => 'required|string|max:255',
             'contact_user_email' => 'required|email|max:255',
             'contact_user_message' => 'required|string',
         ]);
+
         $contact = ContactMe::create($data);
 
-//        dd($contact->contact_user_name);
-        Mail::raw(
-            "New contact message\n\nName: {$contact->contact_user_}\nEmail: {$contact->contact_user_email}\nMessage:\n{$contact->contact_user_message}",
-            function ($mail) use ($contact) {
-                $mail->to('atuoisreal3@email.com')
-                    ->subject('New Contact Message');
-            }
-        );
+        $resend = Resend::client(env('RESEND_KEY'));
 
-        Mail::raw(
-            "Hi {$contact->contact_user_name}, we received your message. We will get back to you soon.",
-            function ($mail) use ($contact) {
-                $mail->to($contact->contact_user_email)
-                    ->subject('Message Received');
-            }
-        );
+        $contact_user_first_name = explode(' ', trim($contact->contact_user_name))[0] ?? '';
+        // Send to admin
+        $resend->emails->send([
+            'from' => $contact_user_first_name.'@atuoisrael.com.ng',
+            'to' => ['atuoisrael3@gmail.com'],
+            'subject' => 'New Contact Message',
+            'text' =>
+                "New contact message\n\n" .
+                "Name: {$contact->contact_user_name}\n" .
+                "Email: {$contact->contact_user_email}\n\n" .
+                "Message:\n{$contact->contact_user_message}",
+        ]);
+
+        // Send confirmation to user
+        $resend->emails->send([
+            'from' => 'Israel@atuoisrael.com.ng',
+            'to' => [$contact->contact_user_email],
+            'subject' => 'Message Received',
+            'text' =>
+                "Hi {$contact->contact_user_name},\n\n" .
+                "We received your message. We will get back to you soon.",
+        ]);
+
         return response()->json([
             'success' => true,
             'message' => 'Your message has been received.'
