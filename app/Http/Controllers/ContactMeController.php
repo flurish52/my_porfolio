@@ -43,6 +43,7 @@ class ContactMeController extends Controller
         $resend->emails->send([
             'from' => $contact_user_first_name.'@atuoisrael.com.ng',
             'to' => ['atuoisrael3@gmail.com'],
+            'reply_to' => $contact->contact_user_email,
             'subject' => 'New Contact Message',
             'text' =>
                 "New contact message\n\n" .

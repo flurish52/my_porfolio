@@ -426,13 +426,6 @@ const projects = [
         link: 'https://www.energyreserve.com.ng'
     },
     {
-        number: '06',
-        title: 'Energy Reserve',
-        desc: 'Company website for a green energy company selling solar products and components.',
-        tech: ['Vue.js', 'Tailwind CSS', 'Laravel', 'MySQL'],
-        link: 'https://www.energyreserve.com.ng'
-    },
-    {
         number: '07',
         title: 'Stechmax Landing Page',
         desc: 'Frontend landing page for Stechmax, a tech agency.',
@@ -445,14 +438,7 @@ const projects = [
         desc: 'Website for Stechmax Academy, a tech training platform.',
         tech: ['Vue.js', 'Tailwind CSS', 'Laravel', 'MySQL'],
         link: 'https://www.academy.stechmax.com'
-    },
-    {
-        number: '09',
-        title: 'Swipe Stake',
-        desc: 'Campaign offers',
-        tech: ['MySql', 'CSS', 'PHP', 'HTML'],
-        link: 'https://www.swipestakes.com'
-    },
+    }
 ]
 const stats = [
     {value: '4+', label: 'Years coding'},
@@ -476,7 +462,7 @@ const skillGroups = [
     },
     {
         category: 'Tools',
-        items: ['Git', 'Vite', 'Storybook', 'Postman'],
+        items: ['Git', 'Vite', 'Postman'],
     },
 ]
 

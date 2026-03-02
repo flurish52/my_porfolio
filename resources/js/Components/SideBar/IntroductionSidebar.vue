@@ -50,7 +50,7 @@
             <!-- Hamburger -->
             <button
                 class="relative flex flex-col justify-center items-center gap-[5px]
-             w-9 h-9 rounded-lg flex-shrink-0
+             w-12 h-12 rounded-lg flex-shrink-0
              hover:bg-primary/5 transition-colors duration-200"
                 :aria-expanded="drawerOpen"
                 aria-controls="mobile-drawer"
@@ -75,7 +75,7 @@
           drawerOpen ? '-translate-y-[7px] -rotate-45' : ''
         ]"
                 />
-                ≡
+<!--                ≡-->
             </button>
         </header>
         <!-- Backdrop -->
