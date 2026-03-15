@@ -19,7 +19,7 @@
         >
             <!-- Pulsing dot -->
             <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            Full-Stack Developer
+            {{ occupation }}
         </div>
 
         <!-- Italic description -->
@@ -39,6 +39,11 @@ defineProps({
         type: String,
         default: 'Crafting elegant web experiences — pixel-perfect UIs, scalable APIs, and everything in between.',
     },
+
+    occupation: {
+        type: String,
+        default: 'Web Developer mm'
+    }
 })
 </script>
 

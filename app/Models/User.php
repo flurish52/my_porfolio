@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function profileSetting()
+    {
+        return $this->hasOne(ProfileSettings::class);
+    }
 }

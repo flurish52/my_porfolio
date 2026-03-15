@@ -97,6 +97,10 @@ class ContactMeController extends Controller
      */
     public function destroy(ContactMe $contactMe)
     {
-        //
+        // Ensure user is authenticated
+        abort_if(!auth()->check(), 401, 'Unauthenticated');
+
+        $contactMe->delete();
     }
+
 }
