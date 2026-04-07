@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col items-center text-center px-3 mt-2 animate-slide-down">
+    <div class="flex flex-col items-center text-center px-3  animate-slide-down">
 
         <!-- Name -->
         <h1 class="font-display font-black text-xl leading-tight tracking-tight text-primary mt-1">

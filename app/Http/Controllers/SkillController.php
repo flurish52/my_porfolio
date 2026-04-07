@@ -12,7 +12,7 @@ class SkillController extends Controller
 
     public function index(){
        return $data = Skill::with('categories')->
-        orderBy('created_at', 'DESC')
+        orderBy('position', 'ASC')
             ->get();
     }
 

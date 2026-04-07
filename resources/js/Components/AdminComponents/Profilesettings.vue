@@ -46,24 +46,24 @@
         <div class="bg-tertiary border border-primary/10 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
 
             <!-- Header -->
-            <div class="flex items-start justify-between gap-4 px-6 py-5 border-b border-primary/10 bg-white">
+            <div class="flex items-start justify-between gap-4 px-6 py-5 border-b border-primary/10 bg-primary">
                 <div>
-                    <div class="flex items-center gap-2.5">
-                        <span class="font-mono text-[0.6rem] font-medium tracking-[0.1em] text-primary/40 bg-primary/5 border border-primary/10 rounded px-1.5 py-0.5 leading-none">PROFILE</span>
-                        <h2 class="m-0 text-sm font-semibold text-primary tracking-tight">Personal Information</h2>
+                    <div class="flex items-center gap-2.5 text-tertiary">
+                        <span class="font-mono text-[0.6rem] font-medium tracking-[0.1em] text-tertiary/40 bg-tertiary/5 border border-primary/10 rounded px-1.5 py-0.5 leading-none">PROFILE</span>
+                        <h2 class="m-0 text-sm font-semibold tracking-tight">Personal Information</h2>
                     </div>
-                    <p class="mt-1 text-[0.72rem] text-primary/40 leading-snug">Your public-facing identity and bio content.</p>
+                    <p class="mt-1 text-[0.72rem] leading-snug">Your public-facing identity and bio content.</p>
                 </div>
             </div>
 
-            <div class="px-6 py-6 bg-tertiary flex flex-col gap-6">
+            <div class="px-6 py-6 bg-primary flex flex-col gap-6">
 
                 <!-- ── Avatar + Username row ───────────────────── -->
                 <div class="flex flex-col sm:flex-row gap-5 items-start">
                     <!-- Avatar upload -->
                     <div class="flex flex-col items-center gap-2.5 flex-shrink-0">
                         <div
-                            class="relative w-20 h-20 rounded-2xl border-2 border-dashed border-primary/20 bg-white overflow-hidden cursor-pointer group hover:border-secondary transition-colors"
+                            class="relative w-20 h-20 rounded-2xl border-2 border-dashed border-tertiary/20 bg-primary overflow-hidden cursor-pointer group hover:border-secondary transition-colors"
                             @click="$refs.pictureInput.click()"
                         >
                             <img
@@ -73,12 +73,14 @@
                                 alt="Preview"
                             />
                             <div v-else class="w-full h-full flex flex-col items-center justify-center gap-1">
-                                <svg class="w-6 h-6 text-primary/20 group-hover:text-secondary transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
+                                <svg class="w-6 h-6 text-tertiary/20 group-hover:text-secondary transition-colors"
+                                     fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
                                 </svg>
-                                <span class="text-[0.6rem] text-primary/30 group-hover:text-secondary transition-colors font-medium">Upload</span>
+                                <span class="text-[0.6rem] text-tertiary/30 group-hover:text-secondary transition-colors font-medium">Upload</span>
                             </div>
-                            <div v-if="profile.picture_preview" class="absolute inset-0 bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <div v-if="profile.picture_preview" class="absolute inset-0 bg-tertiary/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"/>
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"/>
@@ -89,8 +91,8 @@
                         <input ref="pictureInput" type="file" accept="image/*" class="hidden" @change="handlePictureUpload" />
 
                         <div class="text-center">
-                            <p class="text-[0.65rem] text-primary/40 leading-snug">Max 1 MB</p>
-                            <p class="text-[0.65rem] text-primary/40 leading-snug">JPG, PNG, WebP</p>
+                            <p class="text-[0.65rem] text-tertiary/90 leading-snug">Max 1 MB</p>
+                            <p class="text-[0.65rem] text-tertiary/90 leading-snug">JPG, PNG, WebP</p>
                         </div>
                         <p v-if="profile.errors?.picture" class="text-[0.68rem] text-red-400 text-center max-w-[90px] leading-snug">{{ profile.errors.picture }}</p>
                     </div>
@@ -99,17 +101,17 @@
                     <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
                         <!-- Username -->
                         <div class="flex flex-col sm:col-span-2">
-                            <label class="text-[0.72rem] font-medium text-primary/50 uppercase tracking-wide mb-1.5">Username</label>
+                            <label class="text-[0.72rem] font-medium text-tertiary uppercase tracking-wide mb-1.5">Username</label>
                             <div
-                                class="flex items-center gap-2.5 bg-white border rounded-[10px] px-3.5 transition focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)]"
-                                :class="profile.errors?.username ? 'border-red-400' : 'border-primary/15'"
+                                class="flex items-center gap-2.5 bg-primary border rounded-[10px] px-3.5 transition focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)]"
+                                :class="profile.errors?.username ? 'border-red-400' : 'border-tertiary/15'"
                             >
-                                <span class="text-sm text-primary/25 font-mono select-none">@</span>
+                                <span class="text-sm text-tertiary font-mono select-none">@</span>
                                 <input
                                     v-model="profile.username"
                                     type="text"
                                     placeholder="Full name"
-                                    class="flex-1 border-none outline-none bg-transparent text-sm text-primary placeholder-primary/25 py-2.5"
+                                    class="flex-1 border-none outline-none bg-primary text-sm text-tertiary placeholder-tertiary/25 py-2.5"
                                 />
                             </div>
                             <p v-if="profile.errors?.username" class="mt-1 text-[0.7rem] text-red-400">{{ Array.isArray(profile.errors.username) ? profile.errors.username[0] : profile.errors.username }}</p>
@@ -117,22 +119,25 @@
 
                         <!-- Occupation -->
                         <div class="flex flex-col sm:col-span-2">
-                            <label class="text-[0.72rem] font-medium text-primary/50 uppercase tracking-wide mb-1.5">Occupation</label>
+                            <label class="text-[0.72rem] font-medium text-tertiary uppercase tracking-wide mb-1.5">Occupation</label>
                             <div
-                                class="flex items-center gap-2.5 bg-white border rounded-[10px] px-3.5 transition focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)]"
-                                :class="profile.errors?.occupation ? 'border-red-400' : 'border-primary/15'"
+                                class="flex items-center gap-2.5 bg-primary border rounded-[10px] px-3.5 transition focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)]"
+                                :class="profile.errors?.occupation ? 'border-red-400' : 'border-tertiary/15'"
                             >
-                                <svg class="w-[15px] h-[15px] text-primary/25 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"/>
+                                <svg class="w-[15px] h-[15px] text-tertiary/25 flex-shrink-0"
+                                     fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"/>
                                 </svg>
                                 <input
                                     v-model="profile.occupation"
                                     type="text"
                                     placeholder="e.g. Full-Stack Developer"
-                                    class="flex-1 border-none outline-none bg-transparent text-sm text-primary placeholder-primary/25 py-2.5"
+                                    class="flex-1 border-none outline-none bg-transparent text-sm text-primamry placeholder-primary/25 py-2.5"
                                 />
                             </div>
-                            <p v-if="profile.errors?.occupation" class="mt-1 text-[0.7rem] text-red-400">{{ Array.isArray(profile.errors.occupation) ? profile.errors.occupation[0] : profile.errors.occupation }}</p>
+                            <p v-if="profile.errors?.occupation"
+                               class="mt-1 text-[0.7rem] text-red-400">{{ Array.isArray(profile.errors.occupation) ? profile.errors.occupation[0] : profile.errors.occupation }}</p>
                         </div>
                     </div>
                 </div>
@@ -146,14 +151,16 @@
                     <!-- About -->
                     <div class="flex flex-col">
                         <div class="flex items-center justify-between mb-1.5">
-                            <label class="text-[0.72rem] font-medium text-primary/50 uppercase tracking-wide">About</label>
-                            <span class="font-mono text-[0.62rem] text-primary/25">Full bio</span>
+                            <label class="text-[0.72rem] font-medium text-tertiary uppercase tracking-wide">About</label>
+                            <span class="font-mono text-[0.62rem] text-tertiary/50">Full bio</span>
                         </div>
                         <div
                             class="bg-white border rounded-[10px] transition focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)]"
-                            :class="profile.errors?.about ? 'border-red-400' : 'border-primary/15'"
+                            :class="profile.errors?.about ? 'border-red-400' : 'border-tertiary/15'"
                         >
-                            <textarea v-model="profile.about" rows="4" placeholder="Tell visitors about yourself — your background, passions, what drives you…" class="w-full block border-none outline-none bg-transparent text-sm text-primary placeholder-primary/25 px-3.5 py-2.5 resize-y leading-relaxed"></textarea>
+                            <textarea v-model="profile.about" rows="4"
+                                      placeholder="Tell visitors about yourself — your background, passions, what drives you…"
+                                      class="w-full block border-none outline-none bg-transparent text-sm text-tertiary placeholder-tertiary/25 px-3.5 py-2.5 resize-y leading-relaxed"></textarea>
                         </div>
                         <p v-if="profile.errors?.about" class="mt-1 text-[0.7rem] text-red-400">{{ Array.isArray(profile.errors.about) ? profile.errors.about[0] : profile.errors.about }}</p>
                     </div>
@@ -164,29 +171,34 @@
                         <!-- Nav description -->
                         <div class="flex flex-col">
                             <div class="flex items-center justify-between mb-1.5">
-                                <label class="text-[0.72rem] font-medium text-primary/50 uppercase tracking-wide">Nav Description</label>
-                                <span class="font-mono text-[0.62rem] text-primary/25">Sidebar</span>
+                                <label class="text-[0.72rem] font-medium text-tertiary uppercase tracking-wide">Nav Description</label>
+                                <span class="font-mono text-[0.62rem] text-tertiary/50">Sidebar</span>
                             </div>
                             <div
                                 class="bg-white border rounded-[10px] transition focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)]"
-                                :class="profile.errors?.nav_description ? 'border-red-400' : 'border-primary/15'"
+                                :class="profile.errors?.nav_description ? 'border-red-400' : 'border-tertiary/15'"
                             >
-                                <textarea v-model="profile.nav_description" rows="3" placeholder="Short line shown under your name in the sidebar nav…" class="w-full block border-none outline-none bg-transparent text-sm text-primary placeholder-primary/25 px-3.5 py-2.5 resize-y leading-relaxed"></textarea>
+                                <textarea v-model="profile.nav_description" rows="3"
+                                          placeholder="Short line shown under your name in the sidebar nav…"
+                                          class="w-full block border-none outline-none bg-transparent text-sm text-tertiary placeholder-tertiary/25 px-3.5 py-2.5 resize-y leading-relaxed"></textarea>
                             </div>
-                            <p v-if="profile.errors?.nav_description" class="mt-1 text-[0.7rem] text-red-400">{{ Array.isArray(profile.errors.nav_description) ? profile.errors.nav_description[0] : profile.errors.nav_description }}</p>
+                            <p v-if="profile.errors?.nav_description"
+                               class="mt-1 text-[0.7rem] text-red-400">{{ Array.isArray(profile.errors.nav_description) ? profile.errors.nav_description[0] : profile.errors.nav_description }}</p>
                         </div>
 
                         <!-- Home description -->
                         <div class="flex flex-col">
                             <div class="flex items-center justify-between mb-1.5">
-                                <label class="text-[0.72rem] font-medium text-primary/50 uppercase tracking-wide">Home Description</label>
-                                <span class="font-mono text-[0.62rem] text-primary/25">Hero</span>
+                                <label class="text-[0.72rem] font-medium text-tertiary uppercase tracking-wide">Home Description</label>
+                                <span class="font-mono text-[0.62rem] text-tertiary/50">Hero</span>
                             </div>
                             <div
                                 class="bg-white border rounded-[10px] transition focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)]"
-                                :class="profile.errors?.home_description ? 'border-red-400' : 'border-primary/15'"
+                                :class="profile.errors?.home_description ? 'border-red-400' : 'border-tertiary/15'"
                             >
-                                <textarea v-model="profile.home_description" rows="3" placeholder="Tagline or intro shown on the homepage hero section…" class="w-full block border-none outline-none bg-transparent text-sm text-primary placeholder-primary/25 px-3.5 py-2.5 resize-y leading-relaxed"></textarea>
+                                <textarea v-model="profile.home_description" rows="3"
+                                          placeholder="Tagline or intro shown on the homepage hero section…"
+                                          class="w-full block border-none outline-none bg-transparent text-sm text-tertiary placeholder-primary/25 px-3.5 py-2.5 resize-y leading-relaxed"></textarea>
                             </div>
                             <p v-if="profile.errors?.home_description" class="mt-1 text-[0.7rem] text-red-400">{{ Array.isArray(profile.errors.home_description) ? profile.errors.home_description[0] : profile.errors.home_description }}</p>
                         </div>
@@ -200,13 +212,13 @@
                 <div class="flex flex-col gap-3">
                     <div class="flex items-center justify-between">
                         <div>
-                            <label class="text-[0.72rem] font-medium text-primary/50 uppercase tracking-wide">Links</label>
-                            <p class="text-[0.68rem] text-primary/30 mt-0.5">Social profiles, portfolio, CV — anything public.</p>
+                            <label class="text-[0.72rem] font-medium text-tertiary uppercase tracking-wide">Links</label>
+                            <p class="text-[0.68rem] text-tertiary/50 mt-0.5">Social profiles, portfolio, CV — anything public.</p>
                         </div>
                         <button
                             type="button"
                             @click="addLink"
-                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] bg-primary/5 border border-primary/10 text-primary/70 text-[0.75rem] font-semibold cursor-pointer hover:bg-primary/10 hover:text-primary transition-colors"
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] bg-tertiary border border-tertiary/10 text-primary text-[0.75rem] font-semibold cursor-pointer hover:bg-tertiary/10 hover:text-tertiary transition-colors"
                         >
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
@@ -219,16 +231,18 @@
                         <div v-for="(link, index) in profile.links" :key="index" class="flex items-center gap-2">
                             <!-- Label input -->
                             <div class="w-28 flex-shrink-0">
-                                <div class="flex items-center bg-white border border-primary/15 rounded-[8px] px-2.5 focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] transition">
-                                    <input v-model="link.label" type="text" placeholder="Label" class="w-full border-none outline-none bg-transparent text-[0.8rem] text-primary placeholder-primary/25 py-2" />
+                                <div class="flex items-center bg-primary border border-tertiary rounded-[8px] px-2.5 focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] transition">
+                                    <input v-model="link.label" type="text" placeholder="Label"
+                                           class="w-full border-none outline-none bg-transparent text-[0.8rem] text-tertiary placeholder-tertiary/25 py-2" />
                                 </div>
                             </div>
                             <!-- URL input -->
-                            <div class="flex-1 flex items-center bg-white border border-primary/15 rounded-[8px] px-2.5 gap-2 focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] transition">
-                                <svg class="w-3.5 h-3.5 text-primary/25 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <div class="flex-1 flex items-center bg-primary border border-tertiary rounded-[8px] px-2.5 gap-2 focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] transition">
+                                <svg class="w-3.5 h-3.5 text-tertiary flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/>
                                 </svg>
-                                <input v-model="link.url" type="url" placeholder="https://…" class="flex-1 border-none outline-none bg-transparent text-[0.8rem] text-primary placeholder-primary/25 py-2" />
+                                <input v-model="link.url" type="url" placeholder="https://…"
+                                       class="flex-1 border-none outline-none bg-transparent text-[0.8rem] text-tertiary placeholder-tertiary py-2" />
                             </div>
                             <!-- Remove -->
                             <button type="button" @click="removeLink(index)" class="flex-shrink-0 w-7 h-7 rounded-[7px] flex items-center justify-center bg-red-50 border border-red-200 text-red-400 hover:bg-red-100 cursor-pointer transition-colors">
@@ -250,7 +264,8 @@
                 </div>
 
                 <!-- General error -->
-                <p v-if="profile.errors?.general" class="m-0 text-[0.75rem] text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+                <p v-if="profile.errors?.general"
+                   class="m-0 text-[0.75rem] text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
                     {{ profile.errors.general }}
                 </p>
 
@@ -275,27 +290,27 @@
         <!-- ══════════════════════════════════════════════════════
              SECTION 2 — SITE STATS
         ══════════════════════════════════════════════════════ -->
-        <div class="bg-tertiary border border-primary/10 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div class="bg-tertiary border border-tertiary  rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
 
             <!-- Header -->
-            <div class="flex items-start justify-between gap-4 px-6 py-5 border-b border-primary/10 bg-white">
+            <div class="flex items-start justify-between gap-4 px-6 py-5 border-b border-tertiary  bg-tertiary">
                 <div>
                     <div class="flex items-center gap-2.5">
-                        <span class="font-mono text-[0.6rem] font-medium tracking-[0.1em] text-primary/40 bg-primary/5 border border-primary/10 rounded px-1.5 py-0.5 leading-none">STATS</span>
-                        <h2 class="m-0 text-sm font-semibold text-primary tracking-tight">Site Statistics</h2>
+                        <span class="font-mono text-[0.6rem] font-medium tracking-[0.1em] text-primary  bg-tertiary border border-primary  rounded px-1.5 py-0.5 leading-none">STATS</span>
+                        <h2 class="m-0 text-sm font-semibold text-primary acking-tight">Site Statistics</h2>
                     </div>
-                    <p class="mt-1 text-[0.72rem] text-primary/40 leading-snug">
+                    <p class="mt-1 text-[0.72rem] text-primary leading-snug">
                         Highlight numbers shown on your public site — split the
-                        <span class="font-mono bg-primary/5 border border-primary/10 px-1 rounded text-[0.65rem] text-primary/60">value</span>
+                        <span class="font-mono bg-primary border border-tertiary  px-1 rounded text-[0.65rem] text-tertiary ">value</span>
                         and
-                        <span class="font-mono bg-primary/5 border border-primary/10 px-1 rounded text-[0.65rem] text-primary/60">label</span>
+                        <span class="font-mono bg-primary border border-tertiary  px-1 rounded text-[0.65rem] text-tertiary ">label</span>
                         so each part can be styled independently.
                     </p>
                 </div>
                 <button
                     type="button"
                     @click="addStat"
-                    class="flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] bg-secondary text-white border-none text-[0.75rem] font-semibold cursor-pointer hover:opacity-85 transition-all whitespace-nowrap"
+                    class="flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] bg-primary text-tertiary border-none text-[0.75rem] font-semibold cursor-pointer hover:opacity-85 transition-all whitespace-nowrap"
                 >
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
@@ -304,13 +319,13 @@
                 </button>
             </div>
 
-            <div class="px-6 py-6 bg-tertiary flex flex-col gap-5">
+            <div class="px-6 py-6 bg-primary flex flex-col gap-5">
 
                 <!-- Column headers -->
                 <div class="hidden sm:grid grid-cols-[1fr_1fr_2fr_36px] gap-3 px-1">
-                    <span class="text-[0.65rem] font-medium text-primary/30 uppercase tracking-wide">Value</span>
-                    <span class="text-[0.65rem] font-medium text-primary/30 uppercase tracking-wide">Suffix / Unit</span>
-                    <span class="text-[0.65rem] font-medium text-primary/30 uppercase tracking-wide">Label</span>
+                    <span class="text-[0.65rem] font-medium text-tertiary/90 uppercase tracking-wide">Value</span>
+                    <span class="text-[0.65rem] font-medium text-tertiary/90 uppercase tracking-wide">Suffix / Unit</span>
+                    <span class="text-[0.65rem] font-medium text-tertiary/90 uppercase tracking-wide">Label</span>
                     <span></span>
                 </div>
 
@@ -319,33 +334,36 @@
                     <div
                         v-for="(stat, index) in stats.items"
                         :key="index"
-                        class="grid grid-cols-1 sm:grid-cols-[1fr_1fr_2fr_36px] gap-3 items-start p-4 bg-white rounded-xl border border-primary/10 hover:border-primary/20 transition-colors"
+                        class="grid grid-cols-1 sm:grid-cols-[1fr_1fr_2fr_36px] gap-3 items-start p-4 bg-primary rounded-xl border border-primary/10 hover:border-primary/20 transition-colors"
                     >
                         <!-- Value -->
                         <div class="flex flex-col gap-1">
-                            <span class="sm:hidden text-[0.65rem] font-medium text-primary/30 uppercase tracking-wide">Value</span>
-                            <div class="flex items-center bg-tertiary border border-primary/15 rounded-[8px] px-2.5 focus-within:bg-white focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] transition">
-                                <input v-model="stat.value" type="text" placeholder="4" class="w-full border-none outline-none bg-transparent font-mono text-sm font-semibold text-primary placeholder-primary/25 py-2 tracking-tight" />
+                            <span class="sm:hidden text-[0.65rem] font-medium text-tertiary uppercase tracking-wide">Value</span>
+                            <div class="flex items-center bg-primary/90 border border-tertiary/50 rounded-[8px] px-2.5 focus-within:bg-white focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] transition">
+                                <input v-model="stat.value" type="text" placeholder="4"
+                                       class="w-full border-none outline-none bg- font-mono text-sm font-semibold text-tertiary placeholder-tertiary/25 py-2 tracking-tight" />
                             </div>
-                            <p class="text-[0.65rem] text-primary/25">The number itself</p>
+                            <p class="text-[0.65rem] text-tertiary/40">The number itself</p>
                         </div>
 
                         <!-- Suffix -->
                         <div class="flex flex-col gap-1">
-                            <span class="sm:hidden text-[0.65rem] font-medium text-primary/30 uppercase tracking-wide">Suffix / Unit</span>
-                            <div class="flex items-center bg-tertiary border border-primary/15 rounded-[8px] px-2.5 focus-within:bg-white focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] transition">
-                                <input v-model="stat.suffix" type="text" placeholder="+" class="w-full border-none outline-none bg-transparent font-mono text-sm font-semibold text-primary placeholder-primary/25 py-2 tracking-tight" />
+                            <span class="sm:hidden text-[0.65rem] font-medium text-tertiary/30 uppercase tracking-wide">Suffix / Unit</span>
+                            <div class="flex items-center bg-primary border border-tertiary rounded-[8px] px-2.5 focus-within:bg-white focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] transition">
+                                <input v-model="stat.suffix" type="text" placeholder="+"
+                                       class="w-full border-none outline-none bg-transparent font-mono text-sm font-semibold text-tertiary placeholder-tertiary/25 py-2 tracking-tight" />
                             </div>
-                            <p class="text-[0.65rem] text-primary/25">e.g. +, ∞, ×, %</p>
+                            <p class="text-[0.65rem] text-tertiary/40">e.g. +, ∞, ×, %</p>
                         </div>
 
                         <!-- Label -->
                         <div class="flex flex-col gap-1">
                             <span class="sm:hidden text-[0.65rem] font-medium text-primary/30 uppercase tracking-wide">Label</span>
-                            <div class="flex items-center bg-tertiary border border-primary/15 rounded-[8px] px-2.5 focus-within:bg-white focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] transition">
-                                <input v-model="stat.label" type="text" placeholder="Years coding" class="w-full border-none outline-none bg-transparent text-sm text-primary placeholder-primary/25 py-2" />
+                            <div class="flex items-center bg-primary border border-tertiary/50 rounded-[8px] px-2.5 focus-within:bg-white focus-within:border-secondary focus-within:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] transition">
+                                <input v-model="stat.label" type="text" placeholder="Years coding"
+                                       class="w-full border-none outline-none bg-transparent text-sm text-tertiary placeholder-tertiary/30 py-2" />
                             </div>
-                            <p class="text-[0.65rem] text-primary/25">Description of the number</p>
+                            <p class="text-[0.65rem] text-tertiary/40">Description of the number</p>
                         </div>
 
                         <!-- Remove -->
@@ -377,12 +395,12 @@
                         <div
                             v-for="(stat, index) in stats.items"
                             :key="index"
-                            class="flex flex-col items-center justify-center px-4 py-3 rounded-xl bg-white border border-primary/10 min-w-[90px] text-center"
+                            class="flex flex-col items-center justify-center px-4 py-3 rounded-xl bg-white border border-tertiary/10 min-w-[90px] text-center"
                         >
                             <span class="font-mono text-xl font-semibold text-primary leading-none tracking-tight">
-                                {{ stat.value }}<span class="text-primary/35">{{ stat.suffix }}</span>
+                                {{ stat.value }}<span class="text-tertiary/50">{{ stat.suffix }}</span>
                             </span>
-                            <span class="text-[0.68rem] text-primary/50 mt-1 leading-snug">{{ stat.label || '—' }}</span>
+                            <span class="text-[0.68rem] text-tertiary/50 mt-1 leading-snug">{{ stat.label || '—' }}</span>
                         </div>
                     </div>
                 </div>

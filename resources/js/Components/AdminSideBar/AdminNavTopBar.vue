@@ -54,7 +54,7 @@
 
                 <!-- User info -->
                 <div class="flex-1 min-w-0">
-                    <p class="text-sm font-medium text-gray-800 dark:text-gray-100 truncate leading-tight">
+                    <p class="text-sm font-medium text-primary hover:text-secondary truncate leading-tight">
                         {{ user.name }}
                     </p>
                     <p class="text-[11px] text-gray-400 dark:text-gray-500 truncate leading-tight mt-0.5">
@@ -89,7 +89,7 @@ const props = defineProps({
     user: {
         type: Object,
         default: () => ({
-            name: 'Alex Johnson',
+            name: 'Atuo Israel',
             role: 'Super Admin',
             avatar: null,
             status: 'online', // 'online' | 'away' | 'offline'

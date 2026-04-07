@@ -21,9 +21,9 @@ function toggle() {
     <div class="accordion-item">
         <header
             @click="toggle"
-            class="cursor-pointer px-8 md:px-16 py-4 bg-primary text-tertiary flex items-center justify-between rounded-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            class="cursor-pointer px-8 md:px-16 py-4 bg-tertiary text-primary flex items-center justify-between rounded-md hover:shadow-lg transition-all duration-300 hover:scale-[1.01] active:scale-[0.98]"
         >
-      <span class="text-xl font-semibold text-tertiary capitalize relative overflow-hidden">
+      <span class="text-xl font-semibold text-primary capitalize relative overflow-hidden">
         <span class="inline-block transition-all duration-300" :class="{ 'translate-x-1': open }">
           {{ title }}
         </span>

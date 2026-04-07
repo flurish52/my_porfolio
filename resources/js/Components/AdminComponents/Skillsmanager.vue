@@ -140,7 +140,7 @@
                         <button
                             @click="saveSkill"
                             :disabled="form.saving || !form.name.trim() || !form.category_ids.length"
-                            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-primary text-white hover:opacity-90 active:scale-95 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed disabled:scale-100 shadow-sm"
+                            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-tertiary text-primary hover:opacity-90 active:scale-95 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed disabled:scale-100 shadow-sm"
                         >
                             <svg v-if="form.saving" class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
@@ -173,7 +173,7 @@
                         {{ list.length }} {{ list.length === 1 ? 'skill' : 'skills' }} total
                     </p>
                 </div>
-                <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-primary/10 text-primary text-xs font-semibold">
+                <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-tertiary/10 text-tertiary text-xs font-semibold">
                     {{ list.length }}
                 </span>
             </div>

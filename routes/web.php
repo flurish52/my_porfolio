@@ -16,10 +16,10 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'profileProp' => ProfileSettings::first(),
-        'statsProp' => SiteStats::orderBy('created_at', 'DESC')->get(),
-        'projectsProp' => \App\Models\Project::orderBy('created_at', 'DESC')->with('skills')->get(),
-        'categoryProp' => \App\Models\Categories::orderBy('created_at', 'DESC')->with('skills')->get(),
-        'skillsProp' => \App\Models\Skill::orderBy('created_at', 'DESC')->get(),
+        'statsProp' => SiteStats::orderBy('position', 'ASC')->get(),
+        'projectsProp' => \App\Models\Project::orderBy('position', 'ASC')->with('skills')->get(),
+        'categoryProp' => \App\Models\Categories::orderBy('position', 'ASC')->with('skills')->get(),
+        'skillsProp' => \App\Models\Skill::orderBy('position', 'ASC')->get(),
 
 
         'canLogin' => Route::has('login'),

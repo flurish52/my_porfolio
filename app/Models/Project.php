@@ -12,6 +12,9 @@ class Project extends Model
     protected $fillable = [
         'title',
         'description',
+        'role',
+        'link',
+        'image',
     ];
 
     public function skills()

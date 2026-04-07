@@ -3,7 +3,7 @@
     <aside
         class="hidden md:flex flex-col fixed inset-y-0 left-0
            w-1/5 min-w-[210px] max-w-[270px]
-           bg-surface border-r border-primary/10
+           bg-tertiary border-r border-primary/10
            shadow-[4px_0_30px_theme(colors.primary/4%)]
            z-50 overflow-y-auto scrollbar-hide"
         aria-label="Portfolio sidebar"
@@ -11,6 +11,7 @@
         <AdminNavTopBar :user="user" />
         <SidebarNav
             :links="links"
+            :isGuest="false"
             :active-id="activeSection"
             @navigate="emit('navigate', $event)"
         />
@@ -28,7 +29,7 @@
             <div class="flex items-center gap-2.5">
                 <div
                     class="w-8 h-8 rounded-full border-2 border-primary overflow-hidden flex-shrink-0
-               flex items-center justify-center bg-primary/5"
+               flex items-center justify-center bg-tertiary"
                 >
                     <img v-if="photo" :src="photo" :alt="name" class="w-full h-full object-cover" />
                     <span v-else class="font-display font-black text-xs text-primary">{{ initials }}</span>
@@ -141,7 +142,7 @@ watch(
     ([newName, newPhoto]) => {
         user.value = {
             name: newName,
-            avatar: newPhoto || '/profile.png'
+            avatar: newPhoto || '/profile.png',
         }
     },
     { immediate: true }

@@ -5,7 +5,7 @@
     <aside
         class="hidden md:flex flex-col fixed inset-y-0 left-0
            w-1/5 min-w-[210px] max-w-[270px]
-           bg-surface border-r border-primary/10
+           bg-tertiary border-r border-primary/10
            shadow-[4px_0_30px_theme(colors.primary/4%)]
            z-50 overflow-y-auto scrollbar-hide"
         aria-label="Portfolio sidebar"

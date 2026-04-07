@@ -36,58 +36,115 @@
         </p>
 
         <!-- Project cards -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-3xl">
-
-        <a    v-for="(project, index) in projectsProp"
-            :key="project.id"
-            :href="project?.link"
-            target="_blank"
-            class="project-card flex flex-col gap-4 p-6 rounded-xl bg-tertiary
-            border border-primary/8 border-t-2 border-t-primary
-            transition-all duration-300 group relative overflow-hidden"
-            :class="{ 'is-visible': visible }"
-            :style="{ '--delay': `${200 + index * 110}ms` }"
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-2  ">
+            <div
+                v-for="(project, index) in projectsProp"
+                :key="project.id"
+                class="project-card flex flex-col rounded-xl bg-tertiary border border-primary/8 border-t-2 border-t-primary transition-all duration-300 group relative overflow-hidden"
+                :class="{ 'is-visible': visible }"
+                :style="{ '--delay': `${200 + index * 110}ms` }"
             >
-            <!-- Shimmer sweep on hover -->
-            <span class="card-shimmer absolute inset-0 pointer-events-none" aria-hidden="true" />
+                <span class="card-shimmer absolute inset-0 pointer-events-none" aria-hidden="true"></span>
 
-            <div class="flex-1 relative z-10">
-                    <span class="font-mono text-[0.6rem] tracking-wider text-primary/30 mb-2 block index-num"
-                          :class="{ 'is-visible': visible }"
-                          :style="{ '--delay': `${300 + index * 110}ms` }">
-                        {{ String(index + 1).padStart(2, '0') }}
-                    </span>
+                <!-- Project Image -->
+                <div class="w-full h-40 overflow-hidden relative">
+                    <img
+                        v-if="project?.image"
+                        :src="`/storage/${project.image}`"
+                        :alt="project.title"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div
+                        v-else
+                        class="w-full h-full bg-primary/5 flex items-center justify-center"
+                    >
+        <span class="text-primary/20 text-3xl font-display font-bold">
+          {{ String(index + 1).padStart(2, '0') }}
+        </span>
+                    </div>
+                </div>
 
-                <h3 class="font-display font-bold text-base text-primary mb-2 leading-snug
-                               group-hover:translate-x-0.5 transition-transform duration-200">
-                    {{ project?.title }}
-                </h3>
-                <p class="text-sm leading-relaxed text-primary/50">{{ project?.description }}</p>
+                <!-- Card Body -->
+                <div class="flex flex-col gap-4 p-5 flex-1 relative z-10">
+
+                    <!-- Index + Title + Description -->
+                    <div class="flex-1">
+        <span
+            class="font-mono text-[0.6rem] tracking-wider text-primary/30 mb-1.5 block index-num"
+            :class="{ 'is-visible': visible }"
+            :style="{ '--delay': `${300 + index * 110}ms` }"
+        >
+          {{ String(index + 1).padStart(2, '0') }}
+        </span>
+
+                        <h3 class="font-display font-bold text-base text-primary mb-2 leading-snug group-hover:translate-x-0.5 transition-transform duration-200">
+                            <a
+                                v-if="project.link"
+                                :href="project.link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hover:underline"
+                            >
+                                {{ project.title }}
+                            </a>
+                            <span v-else>{{ project.title }}</span>
+                        </h3>
+
+                        <p class="text-sm leading-relaxed text-primary/50">
+                            {{ project.description }}
+                        </p>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="flex flex-wrap gap-1.5">
+        <span
+            v-for="(s, si) in project.skills"
+            :key="s.id || s.name"
+            class="skill-chip font-mono text-[0.58rem] tracking-wide px-2 py-0.5 rounded bg-primary/6 text-primary/55"
+            :class="{ 'is-visible': visible }"
+            :style="{ '--delay': `${400 + index * 110 + si * 40}ms` }"
+        >
+          {{ s.name }}
+        </span>
+                    </div>
+
+                    <!-- Footer: Role + Link -->
+                    <div class="flex items-center justify-between pt-1 border-t border-primary/8">
+        <span class="text-sm font-bold text-tertiary bg-primary px-2.5 py-1 rounded-md">
+          {{ project.role }}
+        </span>
+
+
+                        <a v-if="project.link"
+                           :href="project.link"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center gap-1 text-[0.75rem] font-medium text-primary  hover:text-primary hover:underline underline-offset-2 transition-colors duration-200"
+                        >
+                            <svg class="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                                 viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+                            </svg>
+                            Visit
+                        </a>
+                        <span v-else class="text-[0.8rem] text-primary/25">—</span>
+                    </div>
+
+                </div>
             </div>
-
-            <div class="flex flex-wrap gap-1.5 relative z-10">
-                    <span
-                        v-for="(s, si) in project.skills"
-                        :key="si"
-                        class="skill-chip font-mono text-[0.58rem] tracking-wide px-2 py-0.5 rounded
-                               bg-primary/6 text-primary/55"
-                        :class="{ 'is-visible': visible }"
-                        :style="{ '--delay': `${400 + index * 110 + si * 40}ms` }"
-                    >{{ s.name }}</span>
-            </div>
-            </a>
         </div>
     </section>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import {ref, onMounted, onBeforeUnmount} from 'vue'
 
-defineProps({ projectsProp: Array })
+defineProps({projectsProp: Array})
 
 const sectionRef = ref(null)
-const visible    = ref(false)
-let observer     = null
+const visible = ref(false)
+let observer = null
 
 onMounted(() => {
     observer = new IntersectionObserver(
@@ -97,7 +154,7 @@ onMounted(() => {
                 observer.disconnect()
             }
         },
-        { threshold: 0.12 }
+        {threshold: 0.12}
     )
     if (sectionRef.value) observer.observe(sectionRef.value)
 })
@@ -112,7 +169,11 @@ onBeforeUnmount(() => observer?.disconnect())
     transform: translateX(-16px);
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
-.label-item.is-visible { opacity: 1; transform: translateX(0); }
+
+.label-item.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
 
 /* ── Heading chars drop from above ── */
 .heading-char {
@@ -122,7 +183,11 @@ onBeforeUnmount(() => observer?.disconnect())
     transition: opacity 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay, 0ms),
     transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay, 0ms);
 }
-.heading-char.is-visible { opacity: 1; transform: translateY(0) rotate(0deg); }
+
+.heading-char.is-visible {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+}
 
 /* ── Subtitle fades up ── */
 .subtitle-item {
@@ -130,7 +195,11 @@ onBeforeUnmount(() => observer?.disconnect())
     transform: translateY(10px);
     transition: opacity 0.4s ease 350ms, transform 0.4s ease 350ms;
 }
-.subtitle-item.is-visible { opacity: 1; transform: translateY(0); }
+
+.subtitle-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 /* ── Project card flies up with spring ── */
 .project-card {
@@ -141,7 +210,11 @@ onBeforeUnmount(() => observer?.disconnect())
     box-shadow 0.3s ease,
     translate 0.25s ease;
 }
-.project-card.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+
+.project-card.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
 
 /* Hover lift — separate from entry transition */
 .project-card.is-visible:hover {
@@ -160,6 +233,7 @@ onBeforeUnmount(() => observer?.disconnect())
     transform: translateX(-100%) skewX(-12deg);
     transition: transform 0s;
 }
+
 .project-card:hover .card-shimmer {
     transform: translateX(200%) skewX(-12deg);
     transition: transform 0.6s ease;
@@ -172,7 +246,11 @@ onBeforeUnmount(() => observer?.disconnect())
     transition: opacity 0.3s ease var(--delay, 0ms),
     transform 0.3s ease var(--delay, 0ms);
 }
-.index-num.is-visible { opacity: 1; transform: translateX(0); }
+
+.index-num.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
 
 /* ── Skill chips pop in ── */
 .skill-chip {
@@ -181,5 +259,9 @@ onBeforeUnmount(() => observer?.disconnect())
     transition: opacity 0.25s ease var(--delay, 0ms),
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay, 0ms);
 }
-.skill-chip.is-visible { opacity: 1; transform: scale(1); }
+
+.skill-chip.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
 </style>

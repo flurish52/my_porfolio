@@ -12,7 +12,7 @@ class CategoriesController extends Controller
 
     public function index()
     {
-        return $data =  Categories::orderBy('created_at', 'DESC')->get();
+        return $data =  Categories::orderBy('position', 'ASC')->get();
     }
 
 

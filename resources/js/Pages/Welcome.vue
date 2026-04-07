@@ -1,5 +1,5 @@
 <template>
-    <div class="relative min-h-screen bg-surface font-sans text-primary">
+    <div class="relative min-h-screen bg-tertiary font-sans text-primary">
         <!-- ── Sidebar ───────────────────────────────────────────────────── -->
         <IntroductionSidebar
             :photo="`/storage/${profileProp.picture}`"
@@ -15,7 +15,7 @@
         <!-- ── Main content (offset by sidebar on desktop) ───────────────── -->
         <main
             class="md:ml-[22%] md:max-w-[calc(100%-max(22%,210px))]
-             flex flex-col mb-6 md:px-16 bg-tertiary"
+             flex flex-col mb-6 bg-tertiary text-primary"
         >
 
             <!-- ─────────────────────────────────────────────────────────────
@@ -50,19 +50,19 @@
             :statsProp="statsProp"
             />
 
+            <!-- ══════════════════════════════════════
+          SECTION: Skills
+     ═══════════════════════════════════════ -->
+            <Skills
+                :categories="categoryProp"
+            />
+
 
             <!-- ══════════════════════════════════════
                  SECTION: Projects
             ═══════════════════════════════════════ -->
             <Projects
             :projectsProp="projectsProp"
-            />
-
-            <!-- ══════════════════════════════════════
-                 SECTION: Skills
-            ═══════════════════════════════════════ -->
-            <Skills
-            :categories="categoryProp"
             />
 
             <!-- ══════════════════════════════════════
@@ -101,7 +101,7 @@
                                 placeholder="Your name"
                                 autocomplete="name"
                                 class="bg-surface/8 border border-surface/15 rounded-lg px-4 py-2.5
-                       text-sm text-surface placeholder:text-surface/25
+                       text-sm text-tertiary placeholder:text-tertiary
                        focus:outline-none focus:border-surface/40 focus:bg-surface/12
                        transition-colors duration-200"
                             />
@@ -116,7 +116,7 @@
                                 placeholder="you@example.com"
                                 autocomplete="email"
                                 class="bg-surface/8 border border-surface/15 rounded-lg px-4 py-2.5
-                       text-sm text-surface placeholder:text-surface/25
+                       text-sm text-tertiary placeholder:text-surface/25
                        focus:outline-none focus:border-surface/40 focus:bg-surface/12
                        transition-colors duration-200"
                             />
@@ -132,7 +132,7 @@
                             rows="5"
                             placeholder="Tell me about your project…"
                             class="bg-surface/8 border border-surface/15 rounded-lg px-4 py-2.5
-                     text-sm text-surface placeholder:text-surface/25 resize-y
+                     text-sm text-tertiary placeholder:text-surface/25 resize-y
                      focus:outline-none focus:border-surface/40 focus:bg-surface/12
                      transition-colors duration-200"
                         />
@@ -155,7 +155,7 @@
         </main>
         <section
             id="footer"
-            class="md:hidden absolute bottom-0 px-8 mt-24 md:px-16 bg-primary w-full"
+            class="md:hidden absolute bottom-0 px-8 mt-24 md:px-16 bg-tertiary w-full"
         >
             <Footer
             :name="profileProp.username"

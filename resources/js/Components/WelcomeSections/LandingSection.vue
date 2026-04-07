@@ -2,9 +2,11 @@
     <section
         id="home"
         ref="sectionRef"
-        class="relative min-h-fit flex flex-col md:flex-row items-center px-8 md:px-16 py-20
-               border-b border-primary/6 overflow-hidden"
+        class="relative min-h-fit flex flex-col md:flex-row justify-between items-center px-8 md:px-16 py-20
+               border-b border-primary/6 overflow-hidden bg-center bg-no-repeat bg-fixed"
+        :style="{ backgroundImage: `url(/storage/${profileProp.picture})`, backgroundSize: 'cover' }"
     >
+        <div class="absolute inset-0 bg-tertiary/95"></div>
         <SidebarPhoto
             class="md:hidden"
             :photo="`/storage/${profileProp.picture}`"
@@ -13,8 +15,8 @@
 
         <!-- Decorative bg glyph -->
         <div
-            class="hidden md:block absolute right-0 bottom-0 font-display font-black
-                   text-[clamp(5rem,18vw,13rem)] leading-none tracking-[-4px]
+            class="hidden md:flex absolute right-14  font-display font-black
+                   text-[clamp(10rem,18vw,17rem)] leading-none tracking-[-4px]
                    text-primary select-none pointer-events-none glyph-item"
             :class="{ 'is-visible': visible }"
             aria-hidden="true"
@@ -41,7 +43,7 @@
                     :class="{ 'is-visible': visible }"
                 >Hi, I'm</span>
 
-                <span class="relative inline-block text-primary">
+                <span class="relative inline-block text-primary text-2xl md:text-5xl">
                     <span
                         v-for="(char, i) in (profile.username || '')"
                         :key="i"
@@ -60,18 +62,6 @@
                 class="phrase-container mb-8 phrase-entrance"
                 :class="{ 'is-visible': visible }"
             >
-                <!-- Phase indicator dots -->
-                <div class="flex gap-1.5 mb-3">
-                    <button
-                        v-for="(_, i) in phrases"
-                        :key="i"
-                        class="phase-dot"
-                        :class="{ 'phase-dot--active': i === phraseIndex }"
-                        :aria-label="`Phrase ${i + 1}`"
-                        @click="jumpTo(i)"
-                    />
-                </div>
-
                 <!-- Phrase display area — fixed height so layout doesn't jump -->
                 <div class="phrase-stage" aria-live="polite">
                     <!-- Prefix tag -->
@@ -80,7 +70,7 @@
                     </span>
 
                     <!-- Characters type in one by one -->
-                    <p class="text-base leading-[1.8] text-primary/60 phrase-text">
+                    <p class="text-base leading-[1.8] text-primary/90 phrase-text">
                         <span
                             v-for="(char, ci) in displayedChars"
                             :key="`${phraseIndex}-${ci}`"
@@ -94,14 +84,26 @@
                         <span class="typing-cursor" :class="{ 'typing-cursor--pause': isPausing }">|</span>
                     </p>
                 </div>
+
+                <!-- Phase indicator dots -->
+                <div class="flex gap-1.5 mb-3">
+                    <button
+                        v-for="(_, i) in phrases"
+                        :key="i"
+                        class="phase-dot"
+                        :class="{ 'phase-dot--active': i === phraseIndex }"
+                        :aria-label="`Phrase ${i + 1}`"
+                        @click="jumpTo(i)"
+                    />
+                </div>
             </div>
 
             <!-- CTA buttons -->
-            <div class="flex flex-wrap gap-3 mb-10">
+            <div class="flex flex-wrap gap-3 flex-col md:flex-row mb-10">
                 <button
-                    class="cta-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
-                           bg-primary text-tertiary text-sm font-semibold tracking-wide
-                           hover:opacity-85 active:scale-95 transition-all duration-200 btn-item"
+                    class="flex justify-center items-center text-center  inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
+                           bg-tertiary text-primary text-sm font-semibold tracking-wide
+                           hover:opacity-85 active:scale-95 transition-all duration-200 btn-item border-2 border-primary"
                     :class="{ 'is-visible': visible }"
                     style="--delay: 700ms"
                     @click="scrollToSection('projects')"
@@ -112,8 +114,8 @@
                     </svg>
                 </button>
                 <button
-                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
-                           border border-primary/25 text-primary text-sm font-semibold tracking-wide
+                    class="flex justify-center items-center text-center cta-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
+                           border border-primary/25 text-tertiary bg-primary text-sm font-semibold tracking-wide
                            hover:border-primary/50 hover:bg-primary/5
                            active:scale-95 transition-all duration-200 btn-item"
                     :class="{ 'is-visible': visible }"
@@ -121,6 +123,10 @@
                     @click="scrollToSection('contact')"
                 >
                     Get in Touch
+
+                    <svg class="w-4 h-4 arrow-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
                 </button>
             </div>
 
@@ -195,7 +201,7 @@ function typeNextChar() {
     const full = phrases.value[phraseIndex.value].text
     if (displayedChars.value.length < full.length) {
         displayedChars.value.push(full[displayedChars.value.length])
-        typeTimer = setTimeout(typeNextChar, TYPING_SPEED + Math.random() * 18)
+        typeTimer = setTimeout(typeNextChar, TYPING_SPEED + Math.random() * 30)
     } else {
         // Finished typing — pause then erase
         isPausing.value = true
@@ -349,7 +355,7 @@ onBeforeUnmount(() => clearTimeout(typeTimer))
     opacity: 0; transform: translateX(40px);
     transition: opacity 1.2s ease 400ms, transform 1.2s ease 400ms;
 }
-.glyph-item.is-visible { opacity: 0.045; transform: translateX(0); }
+.glyph-item.is-visible { opacity: 0.6; transform: translateX(0); }
 
 /* ── Keyframes ── */
 @keyframes cursorBlink {

@@ -23,7 +23,7 @@ class ProfileSettingsController extends Controller
 
     public function getStats()
     {
-        return $data = SiteStats::orderBy('created_at', 'DESC')->get();
+        return $data = SiteStats::orderBy('position', 'ASC')->get();
     }
 
 

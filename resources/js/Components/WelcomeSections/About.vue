@@ -28,7 +28,7 @@
         </h2>
 
         <!-- Body text — words wave in -->
-        <div class="max-w-2xl space-y-4 mb-12">
+        <div class="w-full space-y-4 mb-12">
             <p class="text-[0.95rem] leading-[1.85] text-primary/60">
                 <span
                     v-for="(word, i) in words"

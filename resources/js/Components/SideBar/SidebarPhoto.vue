@@ -31,7 +31,7 @@
             </div>
 
             <!-- Status label bottom -->
-            <div class="status-label px-3 bg-tertiary text-primary" aria-hidden="true">
+            <div class="status-label px-3  text-primary" aria-hidden="true">
                 <span class="status-dot" />
                 <span class="font-mono text-[0.48rem] tracking-[0.15em] uppercase">
                     {{ statusText }}
@@ -99,12 +99,12 @@ onBeforeUnmount(() => clearInterval(timer))
 .is-ready .ring { opacity: 1; }
 
 .ring-outer {
-    border: 4px dashed rgba(0,0,0, 0.12);
+    border: 4px dashed rgba(255,255,255,0.5);
     animation: spinCW 50s linear infinite;
 }
 .ring-inner {
     inset: 8px;
-    border: 4px dashed rgba(0,0,0,0.07);
+    border: 4px dashed rgba(255,255,255,0.5);
     animation: spinCCW 50s linear infinite;
 }
 
@@ -124,29 +124,29 @@ onBeforeUnmount(() => clearInterval(timer))
 
 .corner-tl {
     top: 6px; left: 6px;
-    border-top: 2px solid rgba(0,0,0,0.35);
-    border-left: 2px solid rgba(0,0,0,0.35);
+    border-top: 2px solid rgba(248, 248, 248,0.35);
+    border-left: 2px solid rgba(248, 248, 248,0.35);
     transform: translate(4px, 4px);
     transition-delay: 0.7s;
 }
 .corner-tr {
     top: 6px; right: 6px;
-    border-top: 2px solid rgba(0,0,0,0.35);
-    border-right: 2px solid rgba(0,0,0,0.35);
+    border-top: 2px solid rgba(248, 248, 248,0.35);
+    border-right: 2px solid rgba(248, 248, 248,0.35);
     transform: translate(-4px, 4px);
     transition-delay: 0.8s;
 }
 .corner-bl {
     bottom: 22px; left: 6px;
-    border-bottom: 2px solid rgba(0,0,0,0.35);
-    border-left: 2px solid rgba(0,0,0,0.35);
+    border-bottom: 2px solid rgba(248, 248, 248,0.35);
+    border-left: 2px solid rgba(248, 248, 248,0.35);
     transform: translate(4px, -4px);
     transition-delay: 0.9s;
 }
 .corner-br {
     bottom: 22px; right: 6px;
-    border-bottom: 2px solid rgba(0,0,0,0.35);
-    border-right: 2px solid rgba(0,0,0,0.35);
+    border-bottom: 2px solid rgba(248, 248, 248,0.35);
+    border-right: 2px solid rgba(248, 248, 248,0.35);
     transform: translate(-4px, -4px);
     transition-delay: 1.0s;
 }

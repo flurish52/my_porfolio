@@ -1,13 +1,13 @@
 <template>
-    <footer class="w-full bg-primary px-6 py-8 text-tertiary ">
+    <footer class="w-full bg-tertiary px-6 py-8 text-primary ">
         <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
 
             <!-- Left: name + tagline -->
             <div class="flex flex-col items-center sm:items-start gap-0.5">
         <span class="font-display font-black text-surface text-base tracking-tight">
-          {{ name }}<span class="text-surface/30">.</span>
+          {{ name }}<span class="text-primary">.</span>
         </span>
-                <span class="font-serif italic text-surface/40 text-xs">
+                <span class="font-serif italic text-tertiary text-xs">
           {{ tagline }}
         </span>
             </div>
@@ -40,7 +40,7 @@ import { computed } from 'vue'
 const props = defineProps({
     name: {
         type: String,
-        default: 'Atuo Israel',
+        default: 'Atuo Israel Beshuwhobel',
     },
     tagline: {
         type: String,

@@ -61,7 +61,9 @@
                 </button>
             </li>
         </ul>
+        <div v-if="$page?.props?.auth?.user">
         <LogOut />
+        </div>
     </nav>
 </template>
 
@@ -83,9 +85,13 @@ const props = defineProps({
         type: String,
         default: 'home',
     },
+    isGuest: {
+        type: Boolean,
+    },
 })
 
 const emit = defineEmits(['navigate'])
+
 
 // Inline SVG icons keyed by section id
 const icons = {

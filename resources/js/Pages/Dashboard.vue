@@ -8,11 +8,11 @@
     </div>
 
     <main class="md:ml-[22%] md:max-w-[calc(100%-max(22%,210px))] flex flex-col mb-6">
-        <section id="general" class="px-8 md:px-16 pt-20 border-b border-primary/6 section-fade">
+        <section id="general" class="px-4 pt-20 border-b border-primary/6 section-fade">
             <SectionHeader title="general" @toggle="toggle" />
             <div class="collapsible"
                  :class="{ collapsed: !open.general }">
-                <div class="px-8 md:px-16 py-4">
+                <div class="px-6 md:px-4 py-4">
                     <Profilesettings
                         :initialProfile="initialProfile"
                         :initialStats="initialStats"
@@ -22,36 +22,36 @@
             </div>
         </section>
 
-        <section id="categories" class="px-8 md:px-16 pt-10 border-b border-primary/6 section-fade">
+        <section id="categories" class="px-4 pt-10 border-b border-primary/6 section-fade">
             <SectionHeader title="categories" @toggle="toggle" />
             <div class="collapsible" :class="{ collapsed: !open.categories }">
-                <div class="px-8 md:px-16 ">
+                <div class="px-6 md:px-4 ">
                     <CategoriesManager :initialCategories="categories" @saved="getCategories" />
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="min-h-fit px-8 md:px-16 pt-10 border-b border-primary/6 section-fade">
+        <section id="projects" class="min-h-fit px-4 pt-10 border-b border-primary/6 section-fade">
             <SectionHeader title="projects" @toggle="toggle" />
             <div class="collapsible" :class="{ collapsed: !open.projects }">
-                <div class="px-8 md:px-16 py-4">
+                <div class="px-6 md:px-4 py-4">
                     <Projectsmanager :skills="skills" :initialProjects="projects" @saved="getProjects()" />
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="min-h-fit px-8 md:px-16 pt-10 border-b border-primary/6 section-fade">
+        <section id="skills" class="min-h-fit px-4 pt-10 border-b border-primary/6 section-fade">
             <SectionHeader title="skills" @toggle="toggle" />
             <div class="collapsible" :class="{ collapsed: !open.skills }">
-                <div class="px-8 md:px-16 py-4">
+                <div class="px-6 md:px-4 py-4">
                     <Skillsmanager :initialSkills="skills" :categories="categories" @saved="getSkills" />
                 </div>
             </div>
         </section>
-        <section id="messages" class="min-h-fit px-8 md:px-16 pt-10 border-b border-primary/6 section-fade">
+        <section id="messages" class="min-h-fit px-4 pt-10 border-b border-primary/6 section-fade">
             <SectionHeader title="messages" @toggle="toggle" />
             <div class="collapsible" :class="{ collapsed: !open.messages }">
-                <div class="px-8 md:px-16 py-4">
+                <div class="px-6 md:px-4 py-4">
                     <ContactMessages
                         :contactMessages="props.contactMessages" />
                 </div>
@@ -67,7 +67,7 @@ import { computed, onMounted, reactive, ref } from "vue";
 import CategoriesManager from "@/Components/AdminComponents/Categoriesmanager.vue";
 import Skillsmanager from "@/Components/AdminComponents/Skillsmanager.vue";
 import axios from "axios";
-import Projectsmanager from "@/Components/AdminComponents/Projectsmanager.vue";
+import Projectsmanager from "@/Components/AdminComponents/Project/Projectsmanager.old.vue";
 import Profilesettings from "@/Components/AdminComponents/Profilesettings.vue";
 import SectionHeader from "@/Components/AdminComponents/SectionHeader.vue";
 import ContactMessages from "@/Components/AdminComponents/ContactMessages.vue";
@@ -90,7 +90,7 @@ const links = ref([
 ])
 
 const open = reactive({
-    general: true,
+    general: false,
     categories: false,
     projects: false,
     skills: false,

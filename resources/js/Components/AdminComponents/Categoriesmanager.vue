@@ -31,7 +31,7 @@
                         <button
                             @click="saveCategory"
                             :disabled="form.saving || !form.name.trim()"
-                            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-primary text-white hover:opacity-90 active:scale-95 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed disabled:scale-100 shadow-sm"
+                            class="w-full sm:w-auto inline-flex bg-tertiary items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-primary text-primary hover:opacity-90 active:scale-95 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed disabled:scale-100 shadow-sm"
                         >
                             <svg v-if="form.saving" class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
@@ -55,12 +55,12 @@
             <div class="px-5 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
                 <div>
                     <h2 class="text-sm font-semibold text-gray-800 dark:text-gray-100">Existing Categories</h2>
-                    <p class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
+                    <p class="text-xs text-tertiary/40 dark:text-gray-500 mt-0.5">
                         {{ list.length }} {{ list.length === 1 ? 'category' : 'categories' }} total
                     </p>
                 </div>
                 <span
-                    class="inline-flex items-center px-2.5 py-1 rounded-lg bg-primary/10 text-primary text-xs font-semibold">
+                    class="inline-flex items-center px-2.5 py-1 rounded-lg bg-tertiary text-primary text-xs font-semibold">
                     {{ list.length }}
                 </span>
             </div>

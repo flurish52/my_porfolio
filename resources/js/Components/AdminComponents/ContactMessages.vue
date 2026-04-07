@@ -12,11 +12,11 @@
         </div>
 
         <!-- Desktop Table — horizontally scrollable -->
-        <div class="hidden md:block rounded-xl overflow-hidden border border-primary/10 shadow-sm">
+        <div class="hidden md:block rounded-xl overflow-hidden border border-tertiary/50 shadow-sm">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm min-w-[700px]">
                     <thead>
-                    <tr class="bg-primary text-tertiary">
+                    <tr class="bg-tertiary text-primary">
                         <th class="text-left px-4 py-3.5 font-mono text-[0.6rem] tracking-[0.15em] uppercase font-semibold w-10">#</th>
                         <th class="text-left px-4 py-3.5 font-mono text-[0.6rem] tracking-[0.15em] uppercase font-semibold">Sender</th>
                         <th class="text-left px-4 py-3.5 font-mono text-[0.6rem] tracking-[0.15em] uppercase font-semibold">Email</th>
@@ -29,25 +29,25 @@
                     <tr
                         v-for="(msg, i) in contactMessages"
                         :key="msg.id"
-                        class="border-t border-primary/6 transition-colors duration-150 cursor-pointer"
+                        class="border-t border-tertiary/6 transition-colors duration-150 cursor-pointer"
                         :class="[
-                                i % 2 === 0 ? 'bg-surface' : 'bg-primary/[0.02]',
-                                hoveredRow === msg.id ? '!bg-primary/[0.05]' : ''
+                                i % 2 === 0 ? 'bg-tertiary/10 text-tertiary' : 'bg-tertiary/[0.02]',
+                                hoveredRow === msg.id ? '!bg-tertiary/[0.05]' : ''
                             ]"
                         @mouseenter="hoveredRow = msg.id"
                         @mouseleave="hoveredRow = null"
                         @click="openMessage(msg)"
                     >
-                        <td class="px-4 py-3.5 font-mono text-[0.65rem] text-primary/30">{{ i + 1 }}</td>
+                        <td class="px-4 py-3.5 font-mono text-[0.65rem] text-tertiary">{{ i + 1 }}</td>
 
                         <td class="px-4 py-3.5" @click.stop>
                             <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                                        <span class="font-mono text-[0.55rem] font-bold text-primary/60">
+                                <div class="w-7 h-7 rounded-full bg-tertiary flex items-center justify-center flex-shrink-0">
+                                        <span class="font-mono text-[0.55rem] font-bold text-primary">
                                             {{ initials(msg.contact_user_name) }}
                                         </span>
                                 </div>
-                                <span class="font-medium text-primary text-[0.8rem] leading-tight whitespace-nowrap">
+                                <span class="font-medium text-tertiary text-[0.8rem] leading-tight whitespace-nowrap">
                                         {{ msg.contact_user_name }}
                                     </span>
                             </div>
@@ -55,29 +55,30 @@
 
                         <td class="px-4 py-3.5" @click.stop>
                             <a :href="`mailto:${msg.contact_user_email}`"
-                               class="text-[0.78rem] text-primary/55 hover:text-primary transition-colors duration-150 font-mono whitespace-nowrap">
+                               class="text-[0.78rem] text-tertiary/55 hover:text-primary transition-colors duration-150 font-mono whitespace-nowrap">
                                 {{ msg.contact_user_email }}
                             </a>
                         </td>
 
                         <td class="px-4 py-3.5 max-w-[240px]">
-                            <p class="text-[0.78rem] text-primary/60 leading-relaxed line-clamp-2">
+                            <p class="text-[0.78rem] text-tertiary/60 leading-relaxed line-clamp-2">
                                 {{ msg.contact_user_message }}
                             </p>
                         </td>
 
                         <td class="px-4 py-3.5 whitespace-nowrap">
-                                <span class="font-mono text-[0.65rem] text-primary/40">
+                                <span class="font-mono text-[0.65rem] text-tertiary/40">
                                     {{ formatDate(msg.created_at) }}
                                 </span>
                         </td>
 
-                        <td class="px-4 py-3.5" @click.stop>
+                        <td class="px-4 py-3.5"
+                            @click.stop>
                             <div class="flex items-center justify-center gap-2">
                                 <!-- View -->
                                 <button
                                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg
-                                               bg-primary/8 text-primary/70 hover:bg-primary hover:text-tertiary
+                                               bg-tertiary text-primary hover:bg-primary hover:text-tertiary hover:border-2 hover:border-tertiary
                                                transition-all duration-200 text-[0.7rem] font-medium"
                                     title="View full message"
                                     @click="openMessage(msg)"
