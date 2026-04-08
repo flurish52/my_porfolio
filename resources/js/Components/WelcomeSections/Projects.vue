@@ -36,7 +36,7 @@
         </p>
 
         <!-- Project cards -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-2  ">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-2  ">
             <div
                 v-for="(project, index) in projectsProp"
                 :key="project.id"

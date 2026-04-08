@@ -24,7 +24,7 @@
             ──────────────────────────────────────────────────────────────── -->
             <div
                 class="md:hidden sticky top-[53px] z-30
-               flex items-center gap-2 px-5 py-2
+               flex items-center gap-2 py-2
                bg-surface/95 backdrop-blur-md border-b border-primary/8
                text-[0.62rem] font-bold tracking-[0.18em] uppercase text-primary/60
                transition-all duration-300"
@@ -37,8 +37,8 @@
                  SECTION: Home
             ═══════════════════════════════════════ -->
             <LandingSection
-            :profileProp="profileProp"
-            :skillsProp="skillsProp"
+                :profileProp="profileProp"
+                :skillsProp="skillsProp"
             />
 
 
@@ -46,9 +46,16 @@
                  SECTION: About
             ═══════════════════════════════════════ -->
             <About
-            :profileProp="profileProp"
-            :statsProp="statsProp"
+                :profileProp="profileProp"
+                :statsProp="statsProp"
             />
+
+            <!-- ══════════════════════════════════════
+          SECTION: Services
+     ═══════════════════════════════════════ -->
+                <Servicessection
+                :services="services"
+                />
 
             <!-- ══════════════════════════════════════
           SECTION: Skills
@@ -62,7 +69,7 @@
                  SECTION: Projects
             ═══════════════════════════════════════ -->
             <Projects
-            :projectsProp="projectsProp"
+                :projectsProp="projectsProp"
             />
 
             <!-- ══════════════════════════════════════
@@ -158,8 +165,8 @@
             class="md:hidden absolute bottom-0 px-8 mt-24 md:px-16 bg-tertiary w-full"
         >
             <Footer
-            :name="profileProp.username"
-            :tagline="profileProp.nav_description"
+                :name="profileProp.username"
+                :tagline="profileProp.nav_description"
             />
         </section>
     </div>
@@ -174,6 +181,7 @@ import Skills from "@/Components/WelcomeSections/Skills.vue";
 import About from "@/Components/WelcomeSections/About.vue";
 import Projects from "@/Components/WelcomeSections/Projects.vue";
 import LandingSection from "@/Components/WelcomeSections/LandingSection.vue";
+import Servicessection from "@/Components/WelcomeSections/Servicessection.vue";
 
 // ── Props from backend (Laravel passes these) ──────────────────────────────
 const props = defineProps({
@@ -196,8 +204,9 @@ const profile = reactive(props.profileProp || {
 const navLinks = ref(props.linksProp || [
     {id: 'home', label: 'Home', icon: null},
     {id: 'about', label: 'About Me', icon: null},
-    {id: 'projects', label: 'Projects', icon: null},
+    { id: 'services', label: 'Services', icon: null },
     {id: 'skills', label: 'Skills', icon: null},
+    {id: 'projects', label: 'Projects', icon: null},
     {id: 'contact', label: 'Contact', icon: null},
 ])
 
@@ -252,7 +261,12 @@ function scrollToSection(id) {
     const el = document.getElementById(id)
     if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'})
 }
-function getProfileSettings() { axios.get('/profile/settings').then(r => { profile.value = r.data }) }
+
+function getProfileSettings() {
+    axios.get('/profile/settings').then(r => {
+        profile.value = r.data
+    })
+}
 
 
 // ── Intersection Observer for scroll-spy ─────────────────────────────────

@@ -75,9 +75,10 @@ const props = defineProps({
         type: Array,
         default: () => [
             { id: 'home',     label: 'Home',     icon: null },
-            { id: 'projects', label: 'Projects', icon: null },
             { id: 'about',    label: 'About Me', icon: null },
+            { id: 'services', label: 'Services', icon: null },
             { id: 'skills',   label: 'Skills',   icon: null },
+            { id: 'projects', label: 'Projects', icon: null },
             { id: 'contact',  label: 'Contact',  icon: null },
         ],
     },
