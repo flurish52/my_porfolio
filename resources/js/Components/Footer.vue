@@ -1,35 +1,31 @@
 <template>
-    <footer class="w-full bg-tertiary px-6 py-8 text-primary ">
-        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-
-            <!-- Left: name + tagline -->
-            <div class="flex flex-col items-center sm:items-start gap-0.5">
-        <span class="font-display font-black text-surface text-base tracking-tight">
-          {{ name }}<span class="text-primary">.</span>
-        </span>
-                <span class="font-serif italic text-tertiary text-xs">
-          {{ tagline }}
-        </span>
+    <footer class="bg-secondary text-surface">
+        <div
+            class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-5 py-10 md:flex-row md:px-8"
+        >
+            <!-- Name + tagline -->
+            <div class="text-center md:text-left">
+                <p class="text-base font-extrabold tracking-tight">
+                    {{ name }}<span class="text-primary-soft">.</span>
+                </p>
+                <p v-if="tagline" class="mt-1 max-w-sm text-sm text-surface/70">{{ tagline }}</p>
             </div>
 
-            <!-- Center: nav links -->
-            <nav class="flex items-center gap-5" aria-label="Footer navigation">
+            <!-- Navigation -->
+            <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2" aria-label="Footer navigation">
                 <button
                     v-for="link in links"
                     :key="link.id"
-                    class="text-surface/50 hover:text-surface text-xs font-medium tracking-wide
-                 transition-colors duration-200"
+                    type="button"
+                    class="text-sm font-medium text-surface/80 transition-colors duration-200 hover:text-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-surface"
                     @click="emit('navigate', link.id)"
                 >
                     {{ link.label }}
                 </button>
             </nav>
 
-            <!-- Right: copyright -->
-            <p class="font-mono text-[0.6rem] tracking-widest uppercase text-surface/30">
-                © {{ year }} {{ name }}
-            </p>
-
+            <!-- Copyright -->
+            <p class="text-sm text-surface/60">&copy; {{ year }} {{ name }}</p>
         </div>
     </footer>
 </template>
@@ -37,22 +33,19 @@
 <script setup>
 import { computed } from 'vue'
 
-const props = defineProps({
-    name: {
-        type: String,
-        default: 'Atuo Israel Beshuwhobel',
-    },
-    tagline: {
-        type: String,
-        default: 'Crafting the web, one component at a time.',
-    },
+defineProps({
+    name: { type: String, default: 'Ashobel' },
+    tagline: { type: String, default: 'Websites and web apps you can rely on.' },
+    // Same order as the page
     links: {
         type: Array,
         default: () => [
-            { id: 'home',     label: 'Home'     },
-            { id: 'projects', label: 'Projects' },
-            { id: 'about',    label: 'About'    },
-            { id: 'contact',  label: 'Contact'  },
+            { id: 'home', label: 'Home' },
+            { id: 'projects', label: 'Work' },
+            { id: 'services', label: 'Services' },
+            { id: 'about', label: 'About' },
+            { id: 'skills', label: 'Skills' },
+            { id: 'contact', label: 'Contact' },
         ],
     },
 })

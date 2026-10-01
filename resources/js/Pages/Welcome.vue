@@ -1,232 +1,198 @@
 <template>
-    <div class="relative min-h-screen bg-tertiary font-sans text-primary">
-        <!-- ── Sidebar ───────────────────────────────────────────────────── -->
-        <IntroductionSidebar
-            :photo="`/storage/${profileProp.picture}`"
+    <PublicLayout
+        :name="profile.username"
+        :tagline="profile.nav_description || undefined"
+        @navigate="scrollToSection"
+    >
+        <!-- Search + social previews. Copy comes from the DB (seo_title / seo_description) once those fields exist. -->
+        <Head>
+            <title>{{ seoTitle }}</title>
+            <meta head-key="description" name="description" :content="seoDescription" />
+            <meta head-key="og:type" property="og:type" content="website" />
+            <meta head-key="og:title" property="og:title" :content="seoTitle" />
+            <meta head-key="og:description" property="og:description" :content="seoDescription" />
+            <link v-if="canonical" head-key="canonical" rel="canonical" :href="canonical" />
+            <meta v-if="ogImage" head-key="og:image" property="og:image" :content="ogImage" />
+        </Head>
+
+        <TopNav
             :name="profile.username"
-            :description="profileProp.nav_description"
-            :occupation="profileProp.occupation"
             :links="navLinks"
             :active-section="activeSection"
             @navigate="scrollToSection"
         />
 
+        <main id="main">
+            <LandingSection :profileProp="profileProp" :skillsProp="skillsProp" />
 
-        <!-- ── Main content (offset by sidebar on desktop) ───────────────── -->
-        <main
-            class="md:ml-[22%] md:max-w-[calc(100%-max(22%,210px))]
-             flex flex-col mb-6 bg-tertiary text-primary"
-        >
-
-            <!-- ─────────────────────────────────────────────────────────────
-                 MOBILE ONLY: sticky active-section breadcrumb
-                 Sits below the sticky mobile header (top-[53px])
-            ──────────────────────────────────────────────────────────────── -->
-            <div
-                class="md:hidden sticky top-[53px] z-30
-               flex items-center gap-2 py-2
-               bg-surface/95 backdrop-blur-md border-b border-primary/8
-               text-[0.62rem] font-bold tracking-[0.18em] uppercase text-primary/60
-               transition-all duration-300"
-            >
-                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse flex-shrink-0"/>
-                {{ activeSectionLabel }}
-            </div>
-
-            <!-- ══════════════════════════════════════
-                 SECTION: Home
-            ═══════════════════════════════════════ -->
-            <LandingSection
-                :profileProp="profileProp"
-                :skillsProp="skillsProp"
-            />
+            <!-- Work comes right after the hero: proof first -->
+            <Projects :projectsProp="projectsProp" />
 
 
-            <!-- ══════════════════════════════════════
-                 SECTION: About
-            ═══════════════════════════════════════ -->
-            <About
-                :profileProp="profileProp"
-                :statsProp="statsProp"
-            />
+            <About :profileProp="profileProp" :statsProp="statsProp" />
 
-            <!-- ══════════════════════════════════════
-          SECTION: Services
-     ═══════════════════════════════════════ -->
-                <Servicessection
-                :services="services"
-                />
+            <Skills :categories="categoryProp" />
 
-            <!-- ══════════════════════════════════════
-          SECTION: Skills
-     ═══════════════════════════════════════ -->
-            <Skills
-                :categories="categoryProp"
-            />
-
-
-            <!-- ══════════════════════════════════════
-                 SECTION: Projects
-            ═══════════════════════════════════════ -->
-            <Projects
-                :projectsProp="projectsProp"
-            />
-
-            <!-- ══════════════════════════════════════
-                 SECTION: Contact
-            ═══════════════════════════════════════ -->
-            <section
-                id="contact"
-                class="min-h-screen py-20 mb-32 md:mb-0 bg-tertiary px-8"
-            >
-                <p class="font-mono text-[0.62rem] tracking-[0.22em] uppercase text-surface/30 mb-2">
-                    // reach out
-                </p>
-                <h2
-                    class="font-display font-black tracking-tight text-surface mb-3"
-                    style="font-size: clamp(1.9rem, 4vw, 2.8rem)"
-                >Let's Build Something.</h2>
-                <p class="text-sm leading-relaxed text-surface/55 max-w-md mb-10">
-                    Have a project in mind or just want to say hello? I usually respond within 24 hours.
-                </p>
-
-                <form
-                    class="flex flex-col gap-4 max-w-full"
-                    novalidate
-                    @submit.prevent="handleSubmit"
-                >
-                    <div v-if="success" class="text-green-600"> {{ successMessage }}</div>
-                    <div v-if="errorMessage" class="text-red-600"> {{ errorMessage }}</div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="flex flex-col gap-1.5">
-                            <label class="font-mono text-[0.58rem] tracking-[0.14em] uppercase text-surface/40"
-                                   for="cf-name">Name</label>
-                            <input
-                                id="cf-name"
-                                v-model="form.name"
-                                type="text"
-                                placeholder="Your name"
-                                autocomplete="name"
-                                class="bg-surface/8 border border-surface/15 rounded-lg px-4 py-2.5
-                       text-sm text-tertiary placeholder:text-tertiary
-                       focus:outline-none focus:border-surface/40 focus:bg-surface/12
-                       transition-colors duration-200"
-                            />
-                        </div>
-                        <div class="flex flex-col gap-1.5">
-                            <label class="font-mono text-[0.58rem] tracking-[0.14em] uppercase text-surface/40"
-                                   for="cf-email">Email</label>
-                            <input
-                                id="cf-email"
-                                v-model="form.email"
-                                type="email"
-                                placeholder="you@example.com"
-                                autocomplete="email"
-                                class="bg-surface/8 border border-surface/15 rounded-lg px-4 py-2.5
-                       text-sm text-tertiary placeholder:text-surface/25
-                       focus:outline-none focus:border-surface/40 focus:bg-surface/12
-                       transition-colors duration-200"
-                            />
-                        </div>
+            <Servicessection :services="services" />
+            <!-- ══════════ Contact ══════════ -->
+            <section id="contact" class="bg-surface py-20 md:py-28">
+                <div class="mx-auto grid max-w-6xl gap-12 px-5 md:px-8 lg:grid-cols-5 lg:gap-16">
+                    <div class="lg:col-span-2">
+                        <h2 class="text-3xl font-extrabold tracking-tight text-secondary md:text-4xl">
+                            Tell me what you're building.
+                        </h2>
+                        <p class="mt-4 max-w-md leading-relaxed text-secondary-muted">
+                            Every message is read by me, not a team. You'll get an honest answer
+                            within 24 hours, even if the answer is that I'm not the right fit.
+                        </p>
                     </div>
 
-                    <div class="flex flex-col gap-1.5">
-                        <label class="font-mono text-[0.58rem] tracking-[0.14em] uppercase text-surface/40"
-                               for="cf-message">Message</label>
-                        <textarea
-                            id="cf-message"
-                            v-model="form.message"
-                            rows="5"
-                            placeholder="Tell me about your project…"
-                            class="bg-surface/8 border border-surface/15 rounded-lg px-4 py-2.5
-                     text-sm text-tertiary placeholder:text-surface/25 resize-y
-                     focus:outline-none focus:border-surface/40 focus:bg-surface/12
-                     transition-colors duration-200"
-                        />
+                    <div class="lg:col-span-3">
+                        <form
+                            class="flex flex-col gap-5 rounded-2xl border border-line bg-canvas p-6 shadow-card md:p-8"
+                            novalidate
+                            :aria-busy="loading"
+                            @submit.prevent="handleSubmit"
+                        >
+                            <p
+                                v-if="success"
+                                role="status"
+                                class="rounded-lg bg-primary-soft px-4 py-3 text-sm font-medium text-primary-dark"
+                            >
+                                {{ successMessage }}
+                            </p>
+                            <p
+                                v-if="errorMessage"
+                                role="alert"
+                                class="rounded-lg bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
+                            >
+                                {{ errorMessage }}
+                            </p>
+
+                            <div class="grid gap-5 sm:grid-cols-2">
+                                <div class="flex flex-col gap-2">
+                                    <label for="cf-name" class="text-sm font-semibold text-secondary">Your name</label>
+                                    <input
+                                        id="cf-name"
+                                        v-model="form.name"
+                                        name="name"
+                                        type="text"
+                                        autocomplete="name"
+                                        placeholder="Jane Doe"
+                                        class="rounded-lg border border-line bg-surface px-4 py-3 text-sm text-secondary placeholder:text-secondary-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                                    />
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label for="cf-email" class="text-sm font-semibold text-secondary">Email</label>
+                                    <input
+                                        id="cf-email"
+                                        v-model="form.email"
+                                        name="email"
+                                        type="email"
+                                        autocomplete="email"
+                                        placeholder="you@example.com"
+                                        class="rounded-lg border border-line bg-surface px-4 py-3 text-sm text-secondary placeholder:text-secondary-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-2">
+                                <label for="cf-message" class="text-sm font-semibold text-secondary">About your project</label>
+                                <textarea
+                                    id="cf-message"
+                                    v-model="form.message"
+                                    name="message"
+                                    rows="5"
+                                    placeholder="What do you need, and by when?"
+                                    class="resize-y rounded-lg border border-line bg-surface px-4 py-3 text-sm text-secondary placeholder:text-secondary-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                :disabled="loading"
+                                class="self-start rounded-lg bg-primary px-7 py-3 text-sm font-semibold text-surface transition-colors duration-200 hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-50"
+                            >
+                                {{ loading ? 'Sending…' : 'Send message' }}
+                            </button>
+                        </form>
                     </div>
-
-                    <button
-                        type="submit"
-                        :disabled="loading"
-                        class="self-start inline-flex items-center gap-2
-                        px-6 py-2.5 rounded-lg
-                        bg-primary text-tertiary text-sm font-bold tracking-wide
-                        hover:opacity-90 active:scale-95 transition-all duration-200
-                        disabled:opacity-50 disabled:cursor-not-allowed">
-
-                        <span v-if="!loading">Send Message →</span>
-                        <span v-else>Sending...</span>
-                    </button>
-                </form>
+                </div>
             </section>
         </main>
-        <section
-            id="footer"
-            class="md:hidden absolute bottom-0 px-8 mt-24 md:px-16 bg-tertiary w-full"
-        >
-            <Footer
-                :name="profileProp.username"
-                :tagline="profileProp.nav_description"
-            />
-        </section>
-    </div>
+    </PublicLayout>
 </template>
 
 <script setup>
-import {ref, reactive, computed, onMounted, onBeforeUnmount} from 'vue'
-import IntroductionSidebar from '../components/SideBar/IntroductionSidebar.vue'
-import Footer from "@/Components/Footer.vue";
-import axios from "axios";
-import Skills from "@/Components/WelcomeSections/Skills.vue";
-import About from "@/Components/WelcomeSections/About.vue";
-import Projects from "@/Components/WelcomeSections/Projects.vue";
-import LandingSection from "@/Components/WelcomeSections/LandingSection.vue";
-import Servicessection from "@/Components/WelcomeSections/Servicessection.vue";
+import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue'
+import { Head } from '@inertiajs/vue3'
+import axios from 'axios'
+import PublicLayout from '@/Layouts/PublicLayout.vue'
+import TopNav from '@/Components/TopNav.vue'
+import Skills from '@/Components/WelcomeSections/Skills.vue'
+import About from '@/Components/WelcomeSections/About.vue'
+import Projects from '@/Components/WelcomeSections/Projects.vue'
+import LandingSection from '@/Components/WelcomeSections/LandingSection.vue'
+import Servicessection from '@/Components/WelcomeSections/Servicessection.vue'
 
 // ── Props from backend (Laravel passes these) ──────────────────────────────
 const props = defineProps({
-    profileProp: {type: Object, default: null},
-    statsProp: {type: Object, default: null},
-    projectsProp: {type: Object, default: null},
-    categoryProp: {type: Object, default: null},
-    skillsProp: {type: Object, default: null},
-    linksProp: {type: Array, default: null},
+    profileProp: { type: Object, default: null },
+    statsProp: { type: [Object, Array], default: null },
+    projectsProp: { type: [Object, Array], default: null },
+    categoryProp: { type: [Object, Array], default: null },
+    skillsProp: { type: [Object, Array], default: null },
+    linksProp: { type: Array, default: null },
+    services: { type: [Object, Array], default: () => [] },
 })
 
-// ── Profile defaults (override via props from backend) ────────────────────
-const profile = reactive(props.profileProp || {
-    picture: '/profile.png',
-    username: 'Atuo Israel Beshuwhobel',
-    nav_description: 'Crafting elegant web experiences — pixel-perfect UIs, scalable APIs, and everything in between.',
-})
+// ── Profile (reactive; refreshed from /profile/settings) ───────────────────
+const profile = reactive(
+    props.profileProp || {
+        picture: '',
+        username: 'Ashobel',
+        nav_description: '',
+    }
+)
 
-// ── Nav link defaults ──────────────────────────────────────────────────────
-const navLinks = ref(props.linksProp || [
-    {id: 'home', label: 'Home', icon: null},
-    {id: 'about', label: 'About Me', icon: null},
-    { id: 'services', label: 'Services', icon: null },
-    {id: 'skills', label: 'Skills', icon: null},
-    {id: 'projects', label: 'Projects', icon: null},
-    {id: 'contact', label: 'Contact', icon: null},
-])
+// ── SEO ────────────────────────────────────────────────────────────────────
+const seoTitle = computed(
+    () => profile.seo_title || `${profile.username} | Full-Stack Web Developer`
+)
+const seoDescription = computed(
+    () =>
+        profile.seo_description ||
+        `${profile.username} is a full-stack web developer building fast, reliable websites and business software for small and medium businesses.`
+)
+// Browser-only values, so they are skipped safely if you enable Inertia SSR later
+const canonical = typeof window !== 'undefined' ? `${window.location.origin}/` : ''
+const ogImage = computed(() =>
+    typeof window !== 'undefined' && profile.picture
+        ? `${window.location.origin}/storage/${profile.picture}`
+        : ''
+)
 
-// ── Active section (scroll-spy) ────────────────────────────────────────────
+// ── Nav links (same order as the page) ─────────────────────────────────────
+const navLinks = ref(
+    props.linksProp || [
+        { id: 'home', label: 'Home', icon: null },
+        { id: 'projects', label: 'Work', icon: null },
+        { id: 'services', label: 'Services', icon: null },
+        { id: 'about', label: 'About', icon: null },
+        { id: 'skills', label: 'Skills', icon: null },
+        { id: 'contact', label: 'Contact', icon: null },
+    ]
+)
+
+// ── Scroll-spy ─────────────────────────────────────────────────────────────
 const activeSection = ref('home')
 
-const success = ref(false)
-const errorMessage = ref('')
-const successMessage = ref('')
-
-const loading = ref(false)
-
-const activeSectionLabel = computed(() => {
-    const found = navLinks.value.find((l) => l.id === activeSection.value)
-    return found?.label ?? ''
-})
-
 // ── Contact form ───────────────────────────────────────────────────────────
-const form = reactive({name: '', email: '', message: ''})
-
+const form = reactive({ name: '', email: '', message: '' })
+const loading = ref(false)
+const success = ref(false)
+const successMessage = ref('')
+const errorMessage = ref('')
 
 function handleSubmit() {
     success.value = false
@@ -234,21 +200,20 @@ function handleSubmit() {
     successMessage.value = ''
     loading.value = true
 
-    axios.post('contact-me', {
-        contact_user_name: form.name,
-        contact_user_email: form.email,
-        contact_user_message: form.message
-    })
-        .then(response => {
+    axios
+        .post('/contact-me', {
+            contact_user_name: form.name,
+            contact_user_email: form.email,
+            contact_user_message: form.message,
+        })
+        .then((response) => {
             success.value = true
             successMessage.value = response.data.message
-            Object.assign(form, {name: '', email: '', message: ''})
+            Object.assign(form, { name: '', email: '', message: '' })
         })
-        .catch(error => {
-            success.value = false
+        .catch((error) => {
             errorMessage.value =
-                error.response?.data?.message ||
-                'Something went wrong. Please try again.'
+                error.response?.data?.message || 'Something went wrong. Please try again.'
             console.error(error)
         })
         .finally(() => {
@@ -256,57 +221,42 @@ function handleSubmit() {
         })
 }
 
-// ── Scroll to section ──────────────────────────────────────────────────────
+// ── Scroll to section (offset for the sticky nav) ──────────────────────────
+const NAV_OFFSET = 72
+
 function scrollToSection(id) {
     const el = document.getElementById(id)
-    if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'})
+    if (!el) return
+    const top = el.getBoundingClientRect().top + window.scrollY - (id === 'home' ? 0 : NAV_OFFSET)
+    window.scrollTo({ top, behavior: 'smooth' })
 }
 
 function getProfileSettings() {
-    axios.get('/profile/settings').then(r => {
-        profile.value = r.data
+    axios.get('/profile/settings').then((r) => {
+        Object.assign(profile, r.data)
     })
 }
 
-
-// ── Intersection Observer for scroll-spy ─────────────────────────────────
+// ── Intersection Observer ──────────────────────────────────────────────────
 let observer
 
 onMounted(() => {
-    const sectionEls = navLinks.value
-        .map(({id}) => document.getElementById(id))
-        .filter(Boolean)
-
     observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) activeSection.value = entry.target.id
             })
         },
-        {threshold: 0.3}
+        { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
     )
 
-    sectionEls.forEach((el) => observer.observe(el))
+    navLinks.value
+        .map(({ id }) => document.getElementById(id))
+        .filter(Boolean)
+        .forEach((el) => observer.observe(el))
 
     getProfileSettings()
 })
 
 onBeforeUnmount(() => observer?.disconnect())
 </script>
-
-<style scoped>
-@keyframes expand-x {
-    from {
-        transform: scaleX(0);
-        opacity: 0;
-    }
-    to {
-        transform: scaleX(1);
-        opacity: 1;
-    }
-}
-
-.animate-expand-x {
-    animation: expand-x 0.6s ease 0.3s both;
-}
-</style>

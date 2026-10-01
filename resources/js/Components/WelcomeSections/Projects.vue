@@ -1,267 +1,94 @@
 <template>
-    <section
-        id="projects"
-        ref="sectionRef"
-        class="min-h-screen px-8 md:px-16 py-20 border-b border-primary/6 bg-primary/[0.015]"
-    >
-        <!-- Label -->
-        <p
-            class="font-mono text-[0.62rem] tracking-[0.22em] uppercase text-primary/35 mb-2 label-item"
-            :class="{ 'is-visible': visible }"
-        >
-            // my work
-        </p>
+    <section id="projects" class="bg-canvas py-20 md:py-28">
+        <div class="mx-auto max-w-6xl px-5 md:px-8">
+            <div class="max-w-2xl">
+                <h2 class="text-3xl font-extrabold tracking-tight text-secondary md:text-4xl">
+                    Work I'm proud of
+                </h2>
+                <p class="mt-4 leading-relaxed text-secondary-muted">
+                    Real projects, live and in use. Open any of them and see for yourself.
+                </p>
+            </div>
 
-        <!-- Heading chars drop in -->
-        <h2
-            class="font-display font-black tracking-tight text-primary mb-2"
-            style="font-size: clamp(1.9rem, 4vw, 2.8rem)"
-        >
-            <span
-                v-for="(char, i) in 'Projects.'"
-                :key="i"
-                class="heading-char"
-                :class="{ 'is-visible': visible }"
-                :style="{ '--delay': `${60 + i * 40}ms` }"
-            >{{ char }}</span>
-        </h2>
-
-        <!-- Subtitle -->
-        <p
-            class="text-sm leading-relaxed text-primary/50 max-w-md mb-10 subtitle-item"
-            :class="{ 'is-visible': visible }"
-        >
-            A curated selection of things I've built — developer tools, SaaS platforms,
-            and full-featured web applications.
-        </p>
-
-        <!-- Project cards -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-2  ">
-            <div
-                v-for="(project, index) in projectsProp"
-                :key="project.id"
-                class="project-card flex flex-col rounded-xl bg-tertiary border border-primary/8 border-t-2 border-t-primary transition-all duration-300 group relative overflow-hidden"
-                :class="{ 'is-visible': visible }"
-                :style="{ '--delay': `${200 + index * 110}ms` }"
-            >
-                <span class="card-shimmer absolute inset-0 pointer-events-none" aria-hidden="true"></span>
-
-                <!-- Project Image -->
-                <div class="w-full h-40 overflow-hidden relative">
-                    <img
-                        v-if="project?.image"
-                        :src="`/storage/${project.image}`"
-                        :alt="project.title"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div
-                        v-else
-                        class="w-full h-full bg-primary/5 flex items-center justify-center"
-                    >
-        <span class="text-primary/20 text-3xl font-display font-bold">
-          {{ String(index + 1).padStart(2, '0') }}
-        </span>
+            <div class="mt-12 grid gap-6 md:grid-cols-2">
+                <article
+                    v-for="project in visibleProjects"
+                    :key="project.id"
+                    class="flex flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-card transition-colors duration-200 hover:border-primary/40"
+                >
+                    <div class="aspect-[16/10] overflow-hidden border-b border-line bg-canvas">
+                        <img
+                            v-if="project.image"
+                            :src="`/storage/${project.image}`"
+                            :alt="`Screenshot of ${project.title}`"
+                            loading="lazy"
+                            class="h-full w-full object-cover"
+                        />
                     </div>
-                </div>
 
-                <!-- Card Body -->
-                <div class="flex flex-col gap-4 p-5 flex-1 relative z-10">
-
-                    <!-- Index + Title + Description -->
-                    <div class="flex-1">
-        <span
-            class="font-mono text-[0.6rem] tracking-wider text-primary/30 mb-1.5 block index-num"
-            :class="{ 'is-visible': visible }"
-            :style="{ '--delay': `${300 + index * 110}ms` }"
-        >
-          {{ String(index + 1).padStart(2, '0') }}
-        </span>
-
-                        <h3 class="font-display font-bold text-base text-primary mb-2 leading-snug group-hover:translate-x-0.5 transition-transform duration-200">
-                            <a
-                                v-if="project.link"
-                                :href="project.link"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="hover:underline"
-                            >
-                                {{ project.title }}
-                            </a>
-                            <span v-else>{{ project.title }}</span>
+                    <div class="flex flex-1 flex-col p-6">
+                        <p v-if="project.role" class="text-sm font-medium text-primary">
+                            {{ project.role }}
+                        </p>
+                        <h3 class="mt-1 text-xl font-bold tracking-tight text-secondary">
+                            {{ project.title }}
                         </h3>
-
-                        <p class="text-sm leading-relaxed text-primary/50">
+                        <p class="mt-3 leading-relaxed text-secondary-muted">
                             {{ project.description }}
                         </p>
-                    </div>
 
-                    <!-- Skills -->
-                    <div class="flex flex-wrap gap-1.5">
-        <span
-            v-for="(s, si) in project.skills"
-            :key="s.id || s.name"
-            class="skill-chip font-mono text-[0.58rem] tracking-wide px-2 py-0.5 rounded bg-primary/6 text-primary/55"
-            :class="{ 'is-visible': visible }"
-            :style="{ '--delay': `${400 + index * 110 + si * 40}ms` }"
-        >
-          {{ s.name }}
-        </span>
-                    </div>
-
-                    <!-- Footer: Role + Link -->
-                    <div class="flex items-center justify-between pt-1 border-t border-primary/8">
-        <span class="text-sm font-bold text-tertiary bg-primary px-2.5 py-1 rounded-md">
-          {{ project.role }}
-        </span>
-
-
-                        <a v-if="project.link"
-                           :href="project.link"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="inline-flex items-center gap-1 text-[0.75rem] font-medium text-primary  hover:text-primary hover:underline underline-offset-2 transition-colors duration-200"
+                        <!-- Optional: shows once the admin panel has an "outcome" field -->
+                        <p
+                            v-if="project.outcome"
+                            class="mt-4 rounded-lg bg-primary-soft px-4 py-3 text-sm font-medium text-primary-dark"
                         >
-                            <svg class="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
-                                 viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
-                            </svg>
-                            Visit
-                        </a>
-                        <span v-else class="text-[0.8rem] text-primary/25">—</span>
-                    </div>
+                            {{ project.outcome }}
+                        </p>
 
-                </div>
+                        <ul v-if="project.skills?.length" class="mt-5 flex flex-wrap gap-2">
+                            <li
+                                v-for="skill in project.skills"
+                                :key="skill.id || skill.name"
+                                class="rounded-full border border-line bg-canvas px-3 py-1 text-xs font-medium text-secondary-muted"
+                            >
+                                {{ skill.name }}
+                            </li>
+                        </ul>
+
+                        <a
+                            :href="project.link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="mt-6 inline-flex items-center gap-2 self-start text-sm font-semibold text-primary hover:text-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                        >
+                            Visit live site
+                            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                            </svg>
+                        </a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
 </template>
 
 <script setup>
-import {ref, onMounted, onBeforeUnmount} from 'vue'
+import { computed } from 'vue'
 
-defineProps({projectsProp: Array})
+const props = defineProps({ projectsProp: { type: [Array, Object], default: () => [] } })
 
-const sectionRef = ref(null)
-const visible = ref(false)
-let observer = null
+// A dead or malformed link is worse than no project: only show ones that really open.
+function hasValidLink(link) {
+    try {
+        const url = new URL(link)
+        return ['http:', 'https:'].includes(url.protocol) && url.hostname.includes('.')
+    } catch {
+        return false
+    }
+}
 
-onMounted(() => {
-    observer = new IntersectionObserver(
-        ([entry]) => {
-            if (entry.isIntersecting && !visible.value) {
-                visible.value = true
-                observer.disconnect()
-            }
-        },
-        {threshold: 0.12}
-    )
-    if (sectionRef.value) observer.observe(sectionRef.value)
-})
-
-onBeforeUnmount(() => observer?.disconnect())
+const visibleProjects = computed(() =>
+    Object.values(props.projectsProp || {}).filter((p) => p.title && hasValidLink(p.link))
+)
 </script>
-
-<style scoped>
-/* ── Label slides in from left ── */
-.label-item {
-    opacity: 0;
-    transform: translateX(-16px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.label-item.is-visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* ── Heading chars drop from above ── */
-.heading-char {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(-18px) rotate(-4deg);
-    transition: opacity 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay, 0ms),
-    transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay, 0ms);
-}
-
-.heading-char.is-visible {
-    opacity: 1;
-    transform: translateY(0) rotate(0deg);
-}
-
-/* ── Subtitle fades up ── */
-.subtitle-item {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.4s ease 350ms, transform 0.4s ease 350ms;
-}
-
-.subtitle-item.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ── Project card flies up with spring ── */
-.project-card {
-    opacity: 0;
-    transform: translateY(28px) scale(0.97);
-    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay, 0ms),
-    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay, 0ms),
-    box-shadow 0.3s ease,
-    translate 0.25s ease;
-}
-
-.project-card.is-visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-/* Hover lift — separate from entry transition */
-.project-card.is-visible:hover {
-    transform: translateY(-4px) scale(1.005);
-    box-shadow: 0 14px 36px -4px color-mix(in srgb, currentColor 9%, transparent);
-}
-
-/* ── Shimmer sweep on hover ── */
-.card-shimmer {
-    background: linear-gradient(
-        105deg,
-        transparent 35%,
-        color-mix(in srgb, white 8%, transparent) 50%,
-        transparent 65%
-    );
-    transform: translateX(-100%) skewX(-12deg);
-    transition: transform 0s;
-}
-
-.project-card:hover .card-shimmer {
-    transform: translateX(200%) skewX(-12deg);
-    transition: transform 0.6s ease;
-}
-
-/* ── Index number ticks in ── */
-.index-num {
-    opacity: 0;
-    transform: translateX(-8px);
-    transition: opacity 0.3s ease var(--delay, 0ms),
-    transform 0.3s ease var(--delay, 0ms);
-}
-
-.index-num.is-visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* ── Skill chips pop in ── */
-.skill-chip {
-    opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 0.25s ease var(--delay, 0ms),
-    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay, 0ms);
-}
-
-.skill-chip.is-visible {
-    opacity: 1;
-    transform: scale(1);
-}
-</style>

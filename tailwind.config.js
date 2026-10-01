@@ -13,11 +13,32 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                display: ['Figtree', ...defaultTheme.fontFamily.sans],
+                mono: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                primary: '#f8f8f8',
-                secondary: '#212845',
-                tertiary: '#212845'
+                // Brand accent: buttons, links, highlights
+                primary: {
+                    DEFAULT: '#2547D0',
+                    dark: '#1C37A8',   // hover / pressed
+                    soft: '#E8EDFC',   // tinted backgrounds, icon chips
+                },
+                // Ink: headings and body text
+                secondary: {
+                    DEFAULT: '#212845',
+                    muted: '#5B6280',  // paragraphs, captions
+                },
+                // Neutrals
+                canvas: '#F7F8FB',     // page background
+                surface: '#FFFFFF',    // cards, inputs
+                line: '#E4E7EF',       // borders, dividers
+            },
+            boxShadow: {
+                card: '0 1px 2px rgba(33, 40, 69, 0.04), 0 8px 24px rgba(33, 40, 69, 0.06)',
+            },
+            borderRadius: {
+                xl: '0.875rem',
+                '2xl': '1.25rem',
             },
         },
     },
