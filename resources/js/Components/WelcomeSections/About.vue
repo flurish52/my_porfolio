@@ -8,7 +8,7 @@
 
             <!-- Lead: big, with the key phrases highlighted like a marker pen -->
             <p
-                class="mt-8 max-w-4xl text-3xl font-extrabold leading-[1.2] tracking-tight md:text-5xl md:leading-[1.2]"
+                class="mt-8 max-w-4xl text-xl font-extrabold leading-[1.2] tracking-tight md:text-3xl md:leading-[1.2]"
             >
                 <template v-for="(part, i) in leadParts" :key="i">
                     <mark
