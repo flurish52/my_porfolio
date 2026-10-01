@@ -1,0 +1,25 @@
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Keep the Authorization header working
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Let SSL certificate validation (AutoSSL / Let's Encrypt) through
+    RewriteCond %{REQUEST_URI} !^/\.well-known/
+
+    # Forward everything else into /public
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Extra protection: block hidden files such as .env and .git
+<FilesMatch "^\.(?!well-known)">
+    Require all denied
+</FilesMatch>
